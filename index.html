@@ -98,16 +98,23 @@ nav .inner{display:flex;align-items:center;gap:18px;justify-content:space-betwee
   overflow:hidden;
 }
 .stars{position:absolute;inset:0;pointer-events:none;z-index:2}
-.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%;z-index:0}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;z-index:0}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:
-  linear-gradient(180deg, rgba(18,26,58,.45) 0%, rgba(17,26,57,.78) 70%, var(--bg-alt) 100%),
-  linear-gradient(90deg, rgba(15,21,48,.86) 0%, rgba(15,21,48,.42) 55%, rgba(15,21,48,.6) 100%)}
+  linear-gradient(180deg, rgba(18,26,58,.30) 0%, rgba(17,26,57,.68) 74%, var(--bg-alt) 100%),
+  linear-gradient(90deg, rgba(15,21,48,.80) 0%, rgba(15,21,48,.28) 58%, rgba(15,21,48,.50) 100%)}
+/* phones & tablets (portrait): toon de hele foto als banner — geen crop, alle gezichten zichtbaar */
+@media(max-width:820px){
+  .hero{padding:0 0 52px}
+  .hero-photo{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:3/2;object-position:center;z-index:2;display:block}
+  .hero-overlay,.stars{display:none}
+  .hero .wrap{margin-top:24px}
+}
 .hero .wrap{position:relative;z-index:3;display:grid;grid-template-columns:1.12fr .88fr;gap:40px;align-items:center}
 .eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(245,185,66,.16);border:1px solid rgba(245,185,66,.42);color:var(--gold-soft);padding:7px 14px;border-radius:999px;font-weight:800;font-size:var(--fs-small);letter-spacing:.14em;text-transform:uppercase}
 .hero h1{font-size:var(--fs-display);margin:18px 0 0;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.4)}
 .hero h1 .g6{color:var(--gold);position:relative;display:inline-block}
 .hero h1 .g6::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:10px;background:linear-gradient(90deg,var(--gold),var(--amber));opacity:.35;border-radius:8px;z-index:-1}
-.sub{font-size:var(--fs-body);color:var(--cloud);margin:18px 0 0;max-width:42ch}
+.sub{font-size:var(--fs-body);color:var(--cloud);margin:18px 0 0;max-width:42ch;text-shadow:0 2px 14px rgba(0,0,0,.55)}
 
 /* date badge + countdown */
 .datewrap{display:flex;align-items:center;gap:16px;margin-top:22px;flex-wrap:wrap}
@@ -173,6 +180,8 @@ nav .inner{display:flex;align-items:center;gap:18px;justify-content:space-betwee
 .route-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
 #map-route,#map-local{height:440px;border-radius:var(--r);border:1px solid var(--line);box-shadow:var(--shadow);z-index:1}
 .leaflet-container{background:#dfe6ef;font-family:'Archivo'}
+.maplabel.leaflet-tooltip{background:rgba(255,255,255,.95);border:1px solid rgba(0,0,0,.18);color:#142046;font-weight:900;font-size:15px;padding:5px 10px;border-radius:9px;box-shadow:0 2px 7px rgba(0,0,0,.3);white-space:nowrap}
+.maplabel.leaflet-tooltip:before{display:none}
 .route-card{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:14px}
 .leg{display:flex;gap:14px;align-items:flex-start}
 .leg .pin{flex:0 0 auto;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:1.1rem;background:rgba(245,185,66,.18);border:1px solid rgba(245,185,66,.4)}
@@ -267,8 +276,33 @@ nav .inner{display:flex;align-items:center;gap:18px;justify-content:space-betwee
 .fibremsg{margin-top:10px;font-size:var(--fs-small);color:var(--gold-soft);min-height:1.2em;font-weight:700}
 .combo-pop{position:fixed;inset:0;display:none;place-items:center;z-index:200;pointer-events:none}
 .combo-pop.show{display:grid;animation:fade .2s}
+/* Jamaica Jimmy easter egg */
+.jimmy-trigger{margin-top:14px;background:none;border:none;cursor:pointer;font-size:1.5rem;opacity:.45;transition:.2s;line-height:1}
+.jimmy-trigger:hover{opacity:1;transform:scale(1.2) rotate(-8deg)}
+.jimmy-pop{position:fixed;inset:0;display:none;place-items:center;z-index:210;background:rgba(8,11,26,.72);padding:20px;cursor:pointer}
+.jimmy-pop.show{display:grid;animation:fade .25s}
+.jimmy-card{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:22px;padding:26px;max-width:360px;text-align:center;box-shadow:var(--shadow);animation:combo .5s ease}
+.jimmy-art{width:170px;margin:0 auto;display:block}
+.jimmy-txt{margin-top:14px;color:var(--cloud);font-size:var(--fs-body);line-height:1.5}
+.jimmy-txt b{font-family:'Anton';color:var(--gold);font-size:var(--fs-title);display:block;margin-bottom:6px}
+.jimmy-txt span{color:var(--muted);font-size:var(--fs-small);display:block;margin-top:8px}
 .combo-pop b{font-family:'Anton';font-size:clamp(3rem,14vw,9rem);color:var(--gold);text-shadow:0 0 40px rgba(245,185,66,.8), 0 10px 30px rgba(0,0,0,.5);transform:rotate(-7deg);animation:combo .9s ease}
 @keyframes combo{0%{transform:scale(.3) rotate(-7deg);opacity:0}40%{transform:scale(1.12) rotate(-7deg);opacity:1}100%{transform:scale(1) rotate(-7deg);opacity:1}}
+
+/* ---------- QUIZ ---------- */
+.quiz-meta{color:var(--gold-soft);font-weight:800;font-size:var(--fs-small);margin-bottom:8px;display:flex;justify-content:space-between}
+.quiz-q{font-family:'Anton';font-size:var(--fs-title);color:#fff;line-height:1.15;margin-top:14px}
+.quiz-opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.quiz-opt{text-align:left;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--cloud);padding:14px 16px;border-radius:12px;cursor:pointer;font-family:'Archivo';font-weight:700;font-size:var(--fs-body);transition:.15s}
+.quiz-opt:hover{border-color:var(--meuse);background:rgba(43,198,181,.08)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.good{border-color:var(--meuse);background:rgba(43,198,181,.18);color:#bff5ec}
+.quiz-opt.bad{border-color:var(--belgian-red);background:rgba(236,84,84,.15);color:#ffc2c2}
+.quiz-fb{margin-top:14px;font-weight:800;color:var(--gold-soft);min-height:1.4em;font-size:var(--fs-body)}
+.quiz-result{text-align:center}
+.quiz-result .score{font-family:'Anton';font-size:var(--fs-h);color:var(--gold);line-height:1;margin-top:4px}
+.quiz-progress{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid var(--line)}
+.quiz-progress i{display:block;height:100%;background:linear-gradient(90deg,var(--meuse),var(--gold));transition:width .3s}
 
 /* ---------- INFO / CHECKLIST ---------- */
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
@@ -284,6 +318,9 @@ nav .inner{display:flex;align-items:center;gap:18px;justify-content:space-betwee
 .check li.done .box{background:var(--meuse);border-color:var(--meuse);color:#06231f}
 .check li.done .lab{text-decoration:line-through;color:var(--muted)}
 .check li .lab b{color:#fff}
+.pakgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:780px){.pakgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pakgrid{grid-template-columns:1fr}}
 .contacts{display:flex;flex-direction:column;gap:11px;margin-top:6px}
 .contact{display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.04)}
 .contact .e{font-size:1.4rem}
@@ -343,6 +380,7 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
     <span class="star">✦</span><span>SPECIAAL​BIERTJE INCOMING</span>
     <span class="star">✦</span><span>"I DON'T SEE HOW THIS IS RELEVANT" — ANTON</span>
     <span class="star">✦</span><span>FLORIAN! NIET KLOTEN!</span>
+    <span class="star">✦</span><span>WHOOP WHOOP — THAT'S THE SOUND OF THE POLICE</span>
     <span class="star">✦</span><span>SPECIAL THANKS TO MR. V</span>
   </div>
 </div>
@@ -359,6 +397,7 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
       <a href="#kaart">Kaart</a>
       <a href="#highlights">Highlights</a>
       <a href="#bier">Bier</a>
+      <a href="#quiz">Quiz</a>
       <a href="#info">Info</a>
       <a href="#thanks">Mr. V</a>
     </div>
@@ -374,7 +413,7 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
     <div>
       <span class="eyebrow">✦ Weekendje weg · De Mannen</span>
       <h1>FLY LIKE A <span class="g6">G6</span></h1>
-      <p class="sub">Een weekend aan de Maas, met speciaalbier, kayak, padel en maximale vezelafstand — diep in de Ardennen.</p>
+      <p class="sub">Een weekend aan de Maas, met speciaalbier, kayak, padel en maximum fiber distance?!</p>
 
       <div class="datewrap">
         <div class="datebadge">
@@ -446,7 +485,7 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
       <div class="route-card">
         <div class="leg"><div class="pin">🚗</div><div><div class="t">Delft → Halsteren</div><div class="d">Florian &amp; Anton pikken Vincent op</div></div><div class="time">08:00</div></div>
         <hr class="dashline">
-        <div class="leg"><div class="pin">⚡</div><div><div class="t">Meet &amp; greet + Tesla laden</div><div class="d">Koen sluit aan in Halsteren</div></div><div class="time">09:30</div></div>
+        <div class="leg"><div class="pin">⚡</div><div><div class="t">Aankomst bij Koen in Halsteren</div><div class="d">Koen woont hier — meet &amp; greet + Tesla laden</div></div><div class="time">09:30</div></div>
         <hr class="dashline">
         <div class="leg"><div class="pin">🥪</div><div><div class="t">Vertrek + lunch onderweg</div><div class="d">Koen maakt een lekkere lunch to-go</div></div><div class="time">10:00</div></div>
         <hr class="dashline">
@@ -476,7 +515,9 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
           <iframe loading="lazy" src="https://open.spotify.com/embed/track/10nZekHj7rpBPnn7VFaFBg?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
           <iframe loading="lazy" src="https://open.spotify.com/embed/track/1NtuyUlYXc6wDP2zjFpquy?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
           <iframe loading="lazy" src="https://open.spotify.com/embed/track/6VFWpxpQn7bnLt8XCh91Gk?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe loading="lazy" src="https://open.spotify.com/embed/track/3Y6XWs8xMlCngyIxNOFnsp?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
         </div>
+        <small style="display:block;color:var(--muted);font-size:var(--fs-small);margin-top:12px">🚓 Whoop whoop — that's the sound of the police.</small>
       </div>
       <div class="panel">
         <h3>☀️ Weer aan de Maas</h3>
@@ -513,8 +554,8 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
         </div></div>
 
         <div class="tevent"><div class="dot"></div><div class="tcard">
-          <div class="hd"><div class="ico">{{ico_key}}</div><div><div class="when">09:30</div><h4>Meet &amp; greet + Tesla laden</h4></div></div>
-          <p>Koen sluit aan in Halsteren. Even bijkletsen, koffers in de Model Y, accu vol.</p>
+          <div class="hd"><div class="ico">{{ico_key}}</div><div><div class="when">09:30</div><h4>Aankomst bij Koen in Halsteren</h4></div></div>
+          <p>Koen woont hier, dus hij ontvangt de mannen. Even bijkletsen, koffers in de Model Y, accu vol.</p>
           <div class="pills"><span class="pill gold">Tesla Model Y ⚡</span></div>
         </div></div>
 
@@ -527,6 +568,7 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
         <div class="tevent"><div class="dot"></div><div class="tcard">
           <div class="hd"><div class="ico">{{ico_padel}}</div><div><div class="when">12:30 – 13:30</div><h4>Padel @ Smash350</h4></div></div>
           <p>Eerst even de benen strekken op de baan. Rue Saint-Jacques 350, Dinant — vandaar de "350". Wie pakt de eerste winst van het weekend?</p>
+          <div class="note">🎾 Koen heeft in principe 4 rackets + ballen bij zich.</div>
           <div class="pills"><span class="pill gold">Warming-up</span><span class="pill">Competitie</span></div>
         </div></div>
 
@@ -582,6 +624,12 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
           <div class="hd"><div class="ico">{{ico_bbq}}</div><div><div class="when">Avond</div><h4>BBQ aan de Maas 🔥</h4></div></div>
           <p>De grote finale van de zaterdag: vlees van de slager op de BBQ, biertje erbij, voeten in (de buurt van) het water.</p>
           <div class="pills"><span class="pill red">Grill on</span><span class="pill gold">All combo</span></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_quiz}}</div><div><div class="when">Avond (laat)</div><h4>De grote G6-pubquiz 🧠</h4></div></div>
+          <p>Na de BBQ volgt de befaamde quiz: teams, prestige en bragging rights. Een speelbaar voorproefje staat verderop op de site.</p>
+          <div class="pills"><span class="pill gold">Pubquiz</span><a class="link" href="#quiz">▶ Speel het voorproefje</a></div>
         </div></div>
 
       </div>
@@ -643,7 +691,7 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
     <div class="shead">
       <div class="kicker">Grappig tooltje</div>
       <h2>De Bier-o-meter 3000</h2>
-      <p>Draai aan het Belgische speciaalbier-rad en hou de <b>maximum fiber distance</b> in de gaten. Pas op voor de ALL COMBO.</p>
+      <p>Draai aan het Belgische speciaalbier-rad en hou de <b>maximum fiber distance</b> in de gaten.</p>
     </div>
     <div class="duo">
       <div class="panel">
@@ -689,6 +737,20 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
   </div>
 </section>
 
+<!-- ===== QUIZ ===== -->
+<section class="pad" id="quiz">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kicker">Zaterdagavond</div>
+      <h2>De G6-pubquiz</h2>
+      <p>Na de BBQ volgt de echte quiz. Hier alvast een speelbaar voorproefje — hoeveel haal jij?</p>
+    </div>
+    <div class="panel" style="max-width:700px;margin:0 auto">
+      <div id="quizBox"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== INFO + CHECKLIST + QA ===== -->
 <section class="pad" id="info">
   <div class="wrap">
@@ -707,10 +769,12 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
 
         <h3 class="mt">✅ Dingen regelen</h3>
         <ul class="check" id="checklist">
-          <li><span class="box">✓</span><span class="lab"><b>Koen</b> — algemene boodschappen + bier/drank</span></li>
-          <li><span class="box">✓</span><span class="lab">Ter plaatse: <b>vlees, groenten</b> etc. regelen</span></li>
-          <li><span class="box">✓</span><span class="lab">Vlees halen bij de <b>lokale slager</b> (zaterdag)</span></li>
-          <li><span class="box">✓</span><span class="lab"><b>Yvoir Nautic</b> mailen voor extra kano's</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Koen</b> — boodschappen, bier/drank + <b>groenten</b> voor de BBQ</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Vlees</b> voor de BBQ: ter plaatse halen bij de <b>lokale slager</b> (za)</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Koen</b> regelt de BBQ-<b>kolen</b> 🔥</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Keuze maken</b> voor zaterdagmiddag (Maredsous / Leffe / terras)</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Maredsous</b> of <b>Maison Leffe</b> evt. nog reserveren</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Kano's / kayak</b> reserveren via Yvoir Nautic (online boeken, anders mailen)</span></li>
           <li><span class="box">✓</span><span class="lab">Padelbaan <b>Smash350</b> reserveren (vr 12:30)</span></li>
           <li><span class="box">✓</span><span class="lab"><b>Vincent</b> laat zijn Frans los bij de pizzeria</span></li>
         </ul>
@@ -719,28 +783,31 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
       <div class="infocard">
         <h3>📇 Handige contacten</h3>
         <div class="contacts">
-          <div class="contact"><span class="e">🛶</span><div class="ct"><b>Yvoir Nautic</b><span>Kano- &amp; kayakverhuur op de Maas</span></div><a href="mailto:info@yvoirnautic.be">info@yvoirnautic.be</a></div>
+          <div class="contact"><span class="e">🛶</span><div class="ct"><b>Yvoir Nautic</b><span>Kano's/kayak — online reserveren · anders info@yvoirnautic.be</span></div><a href="https://www.yvoirnautic.be/" target="_blank" rel="noopener">Reserveren →</a></div>
           <div class="contact"><span class="e">🍕</span><div class="ct"><b>Pizzeria Venezia</b><span>Afhalen vlakbij — Vincent belt</span></div><a href="https://maps.app.goo.gl/hnUTXSGwChTUGS1q9" target="_blank" rel="noopener">Route →</a></div>
           <div class="contact"><span class="e">🥩</span><div class="ct"><b>Lokale slager</b><span>Vlees voor de BBQ</span></div><a href="https://maps.app.goo.gl/yq2eL6gxedN3Mndi9" target="_blank" rel="noopener">Route →</a></div>
           <div class="contact"><span class="e">🎾</span><div class="ct"><b>Smash350 Padel</b><span>Rue Saint-Jacques 350, Dinant</span></div><a href="https://smash350.be/" target="_blank" rel="noopener">Site →</a></div>
         </div>
-
-        <h3 class="mt">🎒 Niet vergeten</h3>
-        <ul class="check" id="paklijst">
-          <li><span class="box">✓</span><span class="lab">Zwemkleding + handdoek (kayak)</span></li>
-          <li><span class="box">✓</span><span class="lab">Waterschoenen / oude sneakers</span></li>
-          <li><span class="box">✓</span><span class="lab">Zonnebrand + pet</span></li>
-          <li><span class="box">✓</span><span class="lab">Padel-rackets &amp; sportkleding</span></li>
-          <li><span class="box">✓</span><span class="lab">Laadpas Tesla + reisdocumenten</span></li>
-          <li><span class="box">✓</span><span class="lab">Droge zak / telefoonhoesje voor op het water</span></li>
-        </ul>
       </div>
 
     </div>
 
+    <!-- NIET VERGETEN (full width) -->
+    <div class="infocard" style="margin-top:26px">
+      <h3>🎒 Niet vergeten</h3>
+      <ul class="check pakgrid" id="paklijst">
+        <li><span class="box">✓</span><span class="lab">Zwemkleding + handdoek (kayak)</span></li>
+        <li><span class="box">✓</span><span class="lab">Waterschoenen / oude sneakers</span></li>
+        <li><span class="box">✓</span><span class="lab">Zonnebrand + pet</span></li>
+        <li><span class="box">✓</span><span class="lab">Sportkleding voor padel <i>(Koen heeft 4 rackets + ballen)</i></span></li>
+        <li><span class="box">✓</span><span class="lab">Laadpas Tesla + reisdocumenten</span></li>
+        <li><span class="box">✓</span><span class="lab">Droge zak / telefoonhoesje voor op het water</span></li>
+      </ul>
+    </div>
+
     <!-- QA EASTER EGG (full width) -->
     <div class="qa" style="max-width:680px;margin:26px auto 0">
-      <div style="font-weight:900;color:#fff;letter-spacing:.05em">🎤 De grote vragen van het weekend</div>
+      <div style="font-weight:900;color:#fff;letter-spacing:.05em">🎤 Vraag het Doornbos</div>
       <div class="q" id="qaQ">…</div>
       <div class="who" id="qaWho">&nbsp;</div>
       <button class="btn btn-ghost btn-sm" style="margin-top:14px" id="qaBtn">Stel een vraag</button>
@@ -755,7 +822,7 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
       <div class="mrv-art">{{mrv}}</div>
       <div>
         <h2>Special thanks to <span class="gold">Mr. V</span></h2>
-        <p>Zonder hem geen Joint Strike Fighter, geen Ariane Racket, geen toiletten in het vliegtuig, geen perfecte timing en zeker geen <b style="color:#fff">all combo</b>. Een man, een legende, een cheque.</p>
+        <p>Zonder hem geen Joint Strike Fighter, geen Ariane Raket, geen toiletten in het vliegtuig, geen perfecte timing en zeker geen <b style="color:#fff">all combo</b>. Een man, een legende.</p>
         <p class="sig">— Merci, Mr. V ✦</p>
       </div>
     </div>
@@ -768,13 +835,49 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
       <span>✦ "Florian! Niet kloten!"</span>
       <span>✦ Waar staat EASA voor? 🤔</span>
       <span>✦ Duplo Fokker vliegtuig 🛩️</span>
+      <span>✦ "Whoop whoop, that's the sound of the police" 🚓</span>
     </div>
     Fly like a G6 · Weekendje weg in de Ardennen · 26–28 juni 2026 🍺✈️🛶
     <div><span class="temp">⏳ Tijdelijke website — stopt op 29 juni 2026</span></div>
+    <div><button class="jimmy-trigger" id="jimmyBtn" aria-label="easter egg" title="🌴">🌴</button></div>
   </footer>
 </section>
 
 <div class="combo-pop" id="comboPop"><b>ALL COMBO!</b></div>
+
+<!-- Jamaica Jimmy easter egg (voor Anton) -->
+<div class="jimmy-pop" id="jimmyPop">
+  <div class="jimmy-card">
+    <svg class="jimmy-art" viewBox="0 0 200 232" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#3a2a14">
+        <rect x="46" y="120" width="13" height="84" rx="6"/><rect x="141" y="120" width="13" height="84" rx="6"/>
+        <rect x="62" y="138" width="12" height="74" rx="6"/><rect x="126" y="138" width="12" height="74" rx="6"/>
+        <rect x="80" y="150" width="12" height="62" rx="6"/><rect x="108" y="150" width="12" height="62" rx="6"/>
+        <rect x="94" y="156" width="12" height="56" rx="6"/>
+      </g>
+      <ellipse cx="100" cy="120" rx="52" ry="56" fill="#8a5a32"/>
+      <circle cx="48" cy="122" r="8" fill="#8a5a32"/><circle cx="152" cy="122" r="8" fill="#8a5a32"/>
+      <path d="M40 98 Q44 40 100 40 Q156 40 160 98 Q160 104 100 104 Q40 104 40 98 Z" fill="#e23b3b"/>
+      <path d="M41 86 Q100 72 159 86 Q159 95 100 95 Q41 95 41 86 Z" fill="#f5b942"/>
+      <path d="M40 98 Q44 93 100 93 Q156 93 160 98 Q160 106 100 106 Q40 106 40 98 Z" fill="#1f9a4d"/>
+      <rect x="42" y="100" width="116" height="9" rx="4.5" fill="#1f9a4d"/>
+      <circle cx="100" cy="36" r="9" fill="#f5b942"/>
+      <g fill="#15151a"><rect x="63" y="112" width="31" height="21" rx="10"/><rect x="106" y="112" width="31" height="21" rx="10"/><rect x="92" y="118" width="16" height="5"/></g>
+      <line x1="63" y1="116" x2="50" y2="114" stroke="#15151a" stroke-width="3"/>
+      <line x1="137" y1="116" x2="150" y2="114" stroke="#15151a" stroke-width="3"/>
+      <rect x="68" y="116" width="9" height="4" rx="2" fill="#5fd0bb" opacity=".55"/>
+      <rect x="111" y="116" width="9" height="4" rx="2" fill="#5fd0bb" opacity=".55"/>
+      <path d="M100 134 q5 8 -2 12" stroke="#5e3c1e" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M76 150 Q100 174 124 150 Z" fill="#fff"/>
+      <path d="M76 150 Q100 174 124 150" stroke="#5e3c1e" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="jimmy-txt">
+      <b>Yeah mon! 🇯🇲</b>
+      Whoop whoop — that's the sound of the police!
+      <span>— Jamaica Jimmy, speciaal voor Anton 🌴 (klik om te sluiten)</span>
+    </div>
+  </div>
+</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -792,6 +895,7 @@ const ICONS = {
   ico_bbq:`<svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="20" rx="16" ry="6" fill="#9aa6d4"/><path d="M8 20 Q24 30 40 20 L36 30 Q24 36 12 30 Z" fill="#5b6685"/><path d="M14 18 q2 -6 4 0 M22 18 q2 -7 4 0 M30 18 q2 -6 4 0" stroke="#e23b3b" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M16 19 q1.5 -4 3 0 M28 19 q1.5 -4 3 0" stroke="#f5b942" stroke-width="2" fill="none" stroke-linecap="round"/><line x1="14" y1="30" x2="11" y2="42" stroke="#9aa6d4" stroke-width="2.5"/><line x1="34" y1="30" x2="37" y2="42" stroke="#9aa6d4" stroke-width="2.5"/></svg>`,
   ico_bread:`<svg viewBox="0 0 48 48" fill="none"><path d="M8 28 Q8 16 24 16 Q40 16 40 28 Q40 34 34 34 L14 34 Q8 34 8 28 Z" fill="#e8b773"/><path d="M8 28 Q8 16 24 16 Q40 16 40 28" fill="none" stroke="#c98f43" stroke-width="2"/><path d="M16 22 l2 4 M24 21 l0 5 M32 22 l-2 4" stroke="#c98f43" stroke-width="1.6" stroke-linecap="round"/><path d="M10 34 L38 34 L36 38 L12 38 Z" fill="#3aa655"/></svg>`,
   ico_fork:`<svg viewBox="0 0 48 48" fill="none"><path d="M16 8 v12 a4 4 0 0 1 -8 0 V8 M12 8 v12 M20 8 v12 a4 4 0 0 1 -4 4 v16" stroke="#f5b942" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M32 8 q6 2 6 14 q0 6 -4 6 v12" stroke="#2bc6b5" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>`,
+  ico_quiz:`<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="29" rx="5" fill="#f5b942"/><rect x="8" y="6" width="32" height="29" rx="5" fill="none" stroke="#e08a1e" stroke-width="2"/><path d="M19 16 q0 -4.5 5 -4.5 q5 0 5 4.5 q0 3.2 -4 4.7 q-1 .4 -1 2.6" stroke="#1d2754" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="24" cy="29" r="1.9" fill="#1d2754"/><path d="M17 42 l5 -7 h4 l5 7 Z" fill="#e08a1e"/></svg>`,
 };
 
 /* Mr. V cartoon */
@@ -1011,7 +1115,7 @@ function init(){
     {q:'Anton, waar staat EASA voor?',w:'— Koen, met een grijns'},
     {q:'I don\'t see how this is relevant.',w:'— Anton (het is European Union Aviation Safety Agency, maar goed)'},
     {q:'Florian! Niet kloten!',w:'— anoniem, meermaals dit weekend'},
-    {q:'Maar wat ís nou de maximum fiber distance?',w:'— iedereen, op enig moment'},
+    {q:'Maar wat ís nou de maximum fiber distance?',w:'— Doornbos, oprecht benieuwd'},
     {q:'I don\'t see how this is relevant.',w:'— Anton, nog steeds'},
     {q:'All combo of geen combo?',w:'— de eeuwige vraag'},
     {q:'I don\'t see how this is relevant.',w:'— Anton, voor de zekerheid nog een keer'},
@@ -1026,8 +1130,49 @@ function init(){
 
   document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
 
+  /* Jamaica Jimmy easter egg */
+  const jBtn=document.getElementById('jimmyBtn'), jPop=document.getElementById('jimmyPop');
+  if(jBtn&&jPop){jBtn.addEventListener('click',()=>jPop.classList.add('show'));jPop.addEventListener('click',()=>jPop.classList.remove('show'));}
+
   initMaps();
   loadWeather();
+  renderQuiz();
+}
+
+/* ---- G6 pubquiz (voorproefje) ---- */
+const QUIZ=[
+  {q:'Anton, waar staat EASA voor?',a:['European Union Aviation Safety Agency','Extra Awesome Speciaalbier Avond','"I don\'t see how this is relevant"','Een Ardennen Surf Avontuur'],c:0,fb:'Correct! En Anton vindt dat nog steeds niet relevant.'},
+  {q:'In welke Maas-stad is de saxofoon uitgevonden (Adolphe Sax)?',a:['Namen','Dinant','Yvoir','Luik'],c:1,fb:'Dinant — geboortestad van Adolphe Sax.'},
+  {q:'Hoeveel treden gaan er omhoog naar de Citadel van Dinant?',a:['100','408','1066','Geen idee, wij nemen de kabelbaan'],c:1,fb:'408 treden. Of gewoon de kabelbaan — ∞ ritten inbegrepen.'},
+  {q:'Met welk voertuig reizen we naar de Maas?',a:['Tesla Model Y','Duplo Fokker','Joint Strike Fighter','Ariane Raket'],c:0,fb:'Tesla Model Y ⚡ — de rest is voor Mr. V.'},
+  {q:'Wat is de maximum fiber distance?',a:['42 km','All combo','∞ ?!?!','Niet relevant volgens Anton'],c:2,fb:'∞ ?!?! Niemand weet waarom, maar zo is het.'},
+];
+let qIdx=0,qScore=0;
+function renderQuiz(){
+  const box=document.getElementById('quizBox'); if(!box) return;
+  if(qIdx>=QUIZ.length){
+    const msg = qScore===QUIZ.length?'ALL COMBO! 🏆':(qScore>=3?'Sterk werk! 🍺':'Volgende ronde beter 😅');
+    box.innerHTML='<div class="quiz-result"><div class="quiz-meta" style="justify-content:center">Eindscore</div><div class="score">'+qScore+' / '+QUIZ.length+'</div><div class="quiz-fb" style="text-align:center">'+msg+'</div><button class="btn btn-gold" id="quizRestart" style="margin-top:18px">🔁 Opnieuw spelen</button></div>';
+    const rb=document.getElementById('quizRestart'); if(rb) rb.addEventListener('click',()=>{qIdx=0;qScore=0;renderQuiz();});
+    if(qScore===QUIZ.length){const p=document.getElementById('comboPop'); if(p){p.classList.add('show');setTimeout(()=>p.classList.remove('show'),1100);}}
+    return;
+  }
+  const item=QUIZ[qIdx];
+  let opts=''; item.a.forEach((o,i)=>{opts+='<button class="quiz-opt" data-i="'+i+'">'+o+'</button>';});
+  box.innerHTML='<div class="quiz-meta"><span>Vraag '+(qIdx+1)+' / '+QUIZ.length+'</span><span>Score: '+qScore+'</span></div>'+
+    '<div class="quiz-progress"><i style="width:'+(qIdx/QUIZ.length*100)+'%"></i></div>'+
+    '<div class="quiz-q">'+item.q+'</div>'+
+    '<div class="quiz-opts">'+opts+'</div>'+
+    '<div class="quiz-fb" id="quizFb"></div>';
+  box.querySelectorAll('.quiz-opt').forEach(btn=>btn.addEventListener('click',()=>{
+    const i=+btn.dataset.i;
+    box.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+    if(i===item.c){btn.classList.add('good');qScore++;}
+    else{btn.classList.add('bad');const g=box.querySelector('.quiz-opt[data-i="'+item.c+'"]'); if(g) g.classList.add('good');}
+    const fb=document.getElementById('quizFb');
+    fb.innerHTML=item.fb+' <a href="#quiz" id="quizNext" style="color:var(--gold-soft);font-weight:900">— volgende →</a>';
+    document.getElementById('quizNext').addEventListener('click',(e)=>{e.preventDefault();qIdx++;renderQuiz();});
+  }));
 }
 
 /* ---- weather via Open-Meteo (no API key, reliable; werkt bij livegang) ---- */
@@ -1113,18 +1258,21 @@ function initMaps(){
 
   const lc=document.getElementById('map-local');
   if(lc){
+    function bigDot(color){return L.divIcon({className:'',html:'<div style="width:26px;height:26px;border-radius:50%;background:'+color+';border:4px solid #fff;box-shadow:0 2px 7px rgba(0,0,0,.45)"></div>',iconSize:[26,26],iconAnchor:[13,13]});}
     const map=L.map('map-local',{scrollWheelZoom:false}).setView([50.33,4.89],12);
     tiles().addTo(map);
     const poi=[
-      {ll:[50.3790,4.8750],t:'🏡 Les pieds dans l\'eau',d:'Accommodatie · Rue Rochers de Frène 2, Lustin',c:red},
-      {ll:[50.3280,4.8810],t:'🛶 Yvoir Nautic',d:'Start kayaktocht',c:meuse},
-      {ll:[50.2592,4.9145],t:'🏰 Citadel van Dinant',d:'Entree €15 · kabelbaan ∞',c:gold},
-      {ll:[50.2604,4.9123],t:'🍺 Dinant centrum / Maison Leffe',d:'Speciaalbier & saxofoon',c:gold},
-      {ll:[50.3289,4.7672],t:'🧀 Abdij van Maredsous',d:'Brouwerij & kaasmuseum',c:meuse},
-      {ll:[50.2674,4.9376],t:'🎾 Smash350 Padel',d:'Rue Saint-Jacques 350, Dinant',c:gold},
+      {ll:[50.3790,4.8750],n:'🏡 Accommodatie',t:'🏡 Les pieds dans l\'eau',d:'Rue Rochers de Frène 2, Lustin',c:red,dir:'top'},
+      {ll:[50.3280,4.8810],n:'🛶 Yvoir Nautic',t:'🛶 Yvoir Nautic',d:'Start kayaktocht',c:meuse,dir:'left'},
+      {ll:[50.2592,4.9145],n:'🏰 Citadel Dinant',t:'🏰 Citadel van Dinant',d:'Entree €15 · kabelbaan ∞',c:gold,dir:'left'},
+      {ll:[50.2604,4.9123],n:'🍺 Maison Leffe',t:'🍺 Dinant centrum / Maison Leffe',d:'Speciaalbier & saxofoon',c:gold,dir:'right'},
+      {ll:[50.3289,4.7672],n:'🧀 Maredsous',t:'🧀 Abdij van Maredsous',d:'Brouwerij & kaasmuseum',c:meuse,dir:'top'},
+      {ll:[50.2674,4.9376],n:'🎾 Smash350',t:'🎾 Smash350 Padel',d:'Rue Saint-Jacques 350, Dinant',c:gold,dir:'right'},
     ];
-    poi.forEach(p=>L.marker(p.ll,{icon:dot(p.c)}).addTo(map).bindPopup('<b>'+p.t+'</b><br><span style="color:#555">'+p.d+'</span>'));
-    map.fitBounds(poi.map(p=>p.ll),{padding:[50,50]});
+    poi.forEach(p=>L.marker(p.ll,{icon:bigDot(p.c)}).addTo(map)
+      .bindTooltip(p.n,{permanent:true,direction:p.dir,className:'maplabel',offset:p.dir==='top'?[0,-12]:(p.dir==='left'?[-12,0]:[12,0])})
+      .bindPopup('<b>'+p.t+'</b><br><span style="color:#555">'+p.d+'</span>'));
+    map.fitBounds(poi.map(p=>p.ll),{padding:[70,90]});
   }
 }
 </script>

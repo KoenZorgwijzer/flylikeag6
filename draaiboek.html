@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>Draaiboek — Fly like a G6</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
 <style>
   @page { size: A4; margin: 16mm 14mm; }
   :root{
@@ -11,18 +12,9 @@
     --paper:#fbf8f0;
   }
   *{box-sizing:border-box}
-  body{
-    font-family:'Segoe UI',Helvetica,Arial,sans-serif;
-    color:var(--ink); margin:0; background:#fff; font-size:11px; line-height:1.5;
-  }
+  body{font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:var(--ink);margin:0;background:#fff;font-size:11px;line-height:1.5;}
   h1,h2,h3{margin:0;line-height:1.1}
-  .page{padding:0}
-  /* ---- cover header ---- */
-  .cover{
-    background:linear-gradient(135deg,var(--navy),var(--navy2));
-    color:#fff;border-radius:12px;padding:22px 26px;position:relative;overflow:hidden;
-    margin-bottom:18px;
-  }
+  .cover{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:12px;padding:22px 26px;position:relative;overflow:hidden;margin-bottom:18px;}
   .cover::after{content:"✈";position:absolute;right:18px;top:10px;font-size:64px;opacity:.12}
   .cover .kicker{letter-spacing:.22em;text-transform:uppercase;font-size:9px;color:var(--gold-soft);font-weight:700}
   .cover h1{font-size:34px;font-weight:800;margin:6px 0 4px;letter-spacing:.5px}
@@ -32,14 +24,10 @@
   .cover .meta div{font-size:10px}
   .cover .meta .l{color:#9aa6d4;text-transform:uppercase;letter-spacing:.12em;font-size:8px;font-weight:700}
   .cover .meta .v{font-size:13px;font-weight:700;color:#fff}
-
-  /* ---- quick facts ---- */
   .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
   .fact{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:var(--paper)}
   .fact .l{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
   .fact .v{font-size:13px;font-weight:800;color:var(--navy);margin-top:2px}
-
-  /* ---- section ---- */
   .sec{margin-bottom:16px;break-inside:avoid}
   .sechead{display:flex;align-items:center;gap:9px;border-bottom:2px solid var(--navy);padding-bottom:5px;margin-bottom:9px}
   .sechead .badge{background:var(--navy);color:#fff;font-weight:800;font-size:10px;padding:3px 9px;border-radius:6px;letter-spacing:.08em}
@@ -47,41 +35,30 @@
   .sechead .badge.zo{background:var(--gold)}
   .sechead h2{font-size:15px;font-weight:800;color:var(--navy)}
   .sechead .date{margin-left:auto;font-size:10px;color:var(--muted);font-weight:700}
-
-  /* ---- timetable ---- */
   table{width:100%;border-collapse:collapse}
   td{padding:6px 8px;vertical-align:top;border-bottom:1px solid #eee4cd}
   tr:last-child td{border-bottom:none}
   td.t{width:62px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
   td.a b{color:var(--ink);font-size:11.5px}
   td.a .d{color:var(--muted);font-size:10px;margin-top:1px}
-  .tag{display:inline-block;font-size:8px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
-    padding:2px 6px;border-radius:999px;margin-right:4px;margin-top:3px;border:1px solid}
+  .tag{display:inline-block;font-size:8px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:999px;margin-right:4px;margin-top:3px;border:1px solid}
   .tag.gold{color:var(--gold);border-color:#e3c987;background:#fbf2da}
   .tag.meuse{color:var(--meuse);border-color:#9fd6cf;background:#e6f6f4}
   .tag.red{color:var(--red);border-color:#e3b0b0;background:#fbeaea}
-
   .opts{margin-top:6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
   .opt{border:1px dashed var(--line);border-radius:8px;padding:7px 9px;background:#fff}
   .opt b{color:var(--navy);font-size:10.5px}
   .opt p{margin:3px 0 0;font-size:9.5px;color:var(--muted)}
-
-  /* ---- two col info ---- */
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .card{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--paper);break-inside:avoid}
   .card h3{font-size:12px;color:var(--navy);font-weight:800;margin-bottom:6px}
-  .card ul{margin:0;padding-left:15px}
-  .card li{margin-bottom:3px;font-size:10.5px}
   .card .row{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px dotted #e3d9c2;font-size:10px}
   .card .row:last-child{border-bottom:none}
   .card .row b{color:var(--ink)}
   .card .row span{color:var(--muted);text-align:right}
   a{color:var(--gold);text-decoration:none}
-
   .checkrow{display:flex;align-items:center;gap:7px;font-size:10.5px;padding:2px 0}
   .box{width:11px;height:11px;border:1.5px solid var(--muted);border-radius:3px;flex:0 0 auto}
-
-  /* ---- footer ---- */
   .foot{margin-top:14px;border-top:1px solid var(--line);padding-top:9px;display:flex;align-items:center;gap:12px;justify-content:center;color:var(--muted);font-size:10px}
   .foot .v{width:34px;height:42px}
   .foot b{color:var(--navy)}
@@ -117,13 +94,13 @@
     <div class="sechead"><span class="badge">VRIJDAG</span><h2>Heenreis &amp; aankomst</h2><span class="date">26 juni</span></div>
     <table>
       <tr><td class="t">08:00</td><td class="a"><b>Florian &amp; Anton halen Vincent op in Delft</b><div class="d">± 1 uur rijden naar Halsteren</div></td></tr>
-      <tr><td class="t">09:30</td><td class="a"><b>Meet &amp; greet in Halsteren — Tesla laden</b><div class="d">Koen sluit aan</div></td></tr>
+      <tr><td class="t">09:30</td><td class="a"><b>Aankomst bij Koen in Halsteren — Tesla laden</b><div class="d">Koen woont hier, dus hij ontvangt de mannen</div></td></tr>
       <tr><td class="t">10:00</td><td class="a"><b>Vertrek uit Halsteren</b><div class="d">Lunch onderweg — Koen maakt een lekkere lunch · ± 2 uur rijden</div><span class="tag gold">Lunch to-go</span></td></tr>
-      <tr><td class="t">12:30</td><td class="a"><b>Padel @ Smash350</b><div class="d">Tot 13:30 · Rue Saint-Jacques 350, 5500 Dinant — eerste potje van het weekend</div><span class="tag meuse">Reserveren?</span></td></tr>
+      <tr><td class="t">12:30</td><td class="a"><b>Padel @ Smash350</b><div class="d">Tot 13:30 · Rue Saint-Jacques 350, 5500 Dinant · Koen heeft 4 rackets + ballen</div><span class="tag meuse">Reserveren</span></td></tr>
       <tr><td class="t">14:00</td><td class="a"><b>Citadel van Dinant</b><div class="d">Gratis parkeren bij de Citadel · entree € 15 p.p. incl. onbeperkt kabelbaan</div><span class="tag gold">€15 p.p.</span><span class="tag red">Speciaalbier</span></td></tr>
       <tr><td class="t">15:00</td><td class="a"><b>Rondstruinen Dinant + speciaalbiertje</b><div class="d">Collégiale, saxofoon-stad van Adolphe Sax</div></td></tr>
       <tr><td class="t">15:45</td><td class="a"><b>Met de kabelbaan omhoog &amp; terug</b></td></tr>
-      <tr><td class="t">16:30</td><td class="a"><b>Check-in accommodatie + welkomstbiertje</b><div class="d">Les pieds dans l'eau · Bordure de Meuse</div></td></tr>
+      <tr><td class="t">16:30</td><td class="a"><b>Check-in bij Les pieds dans l'eau (de accommodatie)</b><div class="d">Rue Rochers de Frène 2, Lustin · welkomstbiertje op het terras</div></td></tr>
       <tr><td class="t">17:30</td><td class="a"><b>Pizza afhalen — Pizzeria Venezia</b><div class="d">🇫🇷 Vincent belt met zijn goede Frans · vlakbij de accommodatie</div></td></tr>
     </table>
   </div>
@@ -142,6 +119,7 @@
         </div>
       </td></tr>
       <tr><td class="t">Avond</td><td class="a"><b>BBQ aan de Maas 🔥</b><div class="d">Vlees van de slager, biertje erbij, voeten richting het water</div><span class="tag gold">All combo</span></td></tr>
+      <tr><td class="t">Laat</td><td class="a"><b>De grote G6-pubquiz 🧠</b><div class="d">Na de BBQ: quiz met teams, prestige en bragging rights</div><span class="tag meuse">Pubquiz</span></td></tr>
     </table>
   </div>
 
@@ -162,14 +140,14 @@
       <div class="row"><b>Les pieds dans l'eau</b><span>Private Wellness</span></div>
       <div class="row"><b>Adres</b><span>Rue Rochers de Frène 2, 5170 Profondeville (Lustin)</span></div>
       <div class="row"><b>Inbegrepen</b><span>1 kayak + 1 paddleboard</span></div>
-      <div class="row"><b>Extra verhuur</b><span>Yvoir Nautic</span></div>
+      <div class="row"><b>Extra verhuur</b><span>Yvoir Nautic (online boeken)</span></div>
       <div class="row"><b>Booking</b><span><a href="https://www.booking.com/hotel/be/les-pieds-dans-l-eau-profondeville-lustin.nl.html">booking.com</a></span></div>
     </div>
     <div class="card">
       <h3>📇 Contacten &amp; links</h3>
-      <div class="row"><b>🛶 Yvoir Nautic</b><span>info@yvoirnautic.be</span></div>
+      <div class="row"><b>🛶 Yvoir Nautic</b><span>online reserveren · info@yvoirnautic.be</span></div>
+      <div class="row"><b>🎾 Smash350 Padel</b><span>Rue Saint-Jacques 350, Dinant</span></div>
       <div class="row"><b>🍕 Pizzeria Venezia</b><span>afhalen — Vincent belt</span></div>
-      <div class="row"><b>🥩 Lokale slager</b><span>vlees voor BBQ</span></div>
       <div class="row"><b>🍴 Brasserie de Berk</b><span>Bergen op Zoom · zo 12:30</span></div>
     </div>
   </div>
@@ -177,19 +155,20 @@
   <div class="grid2" style="margin-top:14px">
     <div class="card">
       <h3>✅ Wie regelt wat</h3>
-      <div class="checkrow"><span class="box"></span> <b>Koen</b> — algemene boodschappen + bier/drank</div>
-      <div class="checkrow"><span class="box"></span> Ter plaatse: <b>vlees, groenten</b> etc.</div>
-      <div class="checkrow"><span class="box"></span> Vlees halen bij <b>lokale slager</b> (za)</div>
-      <div class="checkrow"><span class="box"></span> <b>Yvoir Nautic</b> mailen — extra kano's</div>
-      <div class="checkrow"><span class="box"></span> Padelbaan <b>Smash 350</b> reserveren (vr 12:30)</div>
-      <div class="checkrow"><span class="box"></span> Keuze za-middag: <b>Maredsous / Leffe / terras</b></div>
+      <div class="checkrow"><span class="box"></span> <b>Koen</b> — boodschappen, bier/drank + <b>groenten</b> voor de BBQ</div>
+      <div class="checkrow"><span class="box"></span> <b>Vlees</b> voor de BBQ: ter plaatse bij de <b>lokale slager</b> (za)</div>
+      <div class="checkrow"><span class="box"></span> <b>Koen</b> regelt de BBQ-<b>kolen</b></div>
+      <div class="checkrow"><span class="box"></span> <b>Keuze maken</b> voor zaterdagmiddag (Maredsous / Leffe / terras)</div>
+      <div class="checkrow"><span class="box"></span> <b>Maredsous</b> of <b>Maison Leffe</b> evt. nog reserveren</div>
+      <div class="checkrow"><span class="box"></span> <b>Kano's/kayak</b> reserveren via Yvoir Nautic (online, anders mail)</div>
+      <div class="checkrow"><span class="box"></span> Padelbaan <b>Smash350</b> reserveren (vr 12:30)</div>
     </div>
     <div class="card">
       <h3>🎒 Niet vergeten</h3>
       <div class="checkrow"><span class="box"></span> Zwemkleding + handdoek (kayak)</div>
       <div class="checkrow"><span class="box"></span> Waterschoenen / oude sneakers</div>
       <div class="checkrow"><span class="box"></span> Zonnebrand + pet</div>
-      <div class="checkrow"><span class="box"></span> Padel-rackets &amp; sportkleding</div>
+      <div class="checkrow"><span class="box"></span> Sportkleding voor padel <i>(Koen heeft 4 rackets + ballen)</i></div>
       <div class="checkrow"><span class="box"></span> Laadpas Tesla + reisdocumenten</div>
       <div class="checkrow"><span class="box"></span> Droge zak / telefoonhoesje voor op het water</div>
     </div>
