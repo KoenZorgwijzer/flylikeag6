@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fly like a G6 ✈️ — Weekendje weg in de Ardennen</title>
+<meta name="description" content="Het weekendje weg van de mannen — Ardennen, 26 t/m 28 juni. Planning, route, kayak, Citadel, speciaalbier & meer." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<style>
+:root{
+  /* lighter palette */
+  --bg:#161f42;
+  --bg-alt:#111a39;
+  --card:#1d2754;
+  --card-2:#243064;
+  --gold:#f5b942;
+  --gold-soft:#ffd884;
+  --amber:#e89a2c;
+  --meuse:#2bc6b5;
+  --meuse-deep:#0e7c72;
+  --belgian-red:#ec5454;
+  --cloud:#e2e8ff;
+  --muted:#aeb8e0;
+  --line:rgba(255,255,255,.15);
+  --shadow:0 18px 50px -18px rgba(0,0,0,.5);
+  --r:22px;
+  /* type scale — max 3 tekstgroottes (kop / tekst / label) + de hero-titel.
+     Alles bewust groter en mobiel goed leesbaar. --fs-h en --fs-title zijn
+     opzettelijk identiek zodat koppen én titels één formaat delen. */
+  --fs-display:clamp(2.9rem,9vw,5rem);
+  --fs-h:clamp(1.55rem,3.6vw,2.1rem);     /* KOP */
+  --fs-title:clamp(1.55rem,3.6vw,2.1rem); /* = KOP */
+  --fs-body:1.2rem;                        /* TEKST */
+  --fs-small:1rem;                         /* LABEL */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Archivo',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--cloud);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  font-size:var(--fs-body);
+  line-height:1.6;
+}
+h1,h2,h3,h4{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.5px;line-height:1.05;margin:0}
+a{color:inherit}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.mono{font-family:'JetBrains Mono',monospace}
+.pad{padding:84px 0}
+
+/* ---------- TICKER ---------- */
+.ticker{
+  background:var(--gold);color:#1a1303;font-weight:900;
+  border-bottom:3px solid #1a1303;overflow:hidden;white-space:nowrap;
+  position:sticky;top:0;z-index:60;font-size:var(--fs-small);letter-spacing:.08em;text-transform:uppercase;
+}
+.ticker .run{display:inline-block;padding:9px 0;animation:tick 26s linear infinite}
+.ticker span{margin:0 26px}
+.ticker .star{color:var(--belgian-red)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- NAV ---------- */
+nav{
+  position:sticky;top:35px;z-index:50;backdrop-filter:blur(12px);
+  background:rgba(22,31,66,.78);border-bottom:1px solid var(--line);
+}
+nav .inner{display:flex;align-items:center;gap:18px;justify-content:space-between;padding:11px 22px;max-width:1120px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Anton';font-size:var(--fs-body);letter-spacing:1px}
+.brand .jet{filter:drop-shadow(0 2px 6px rgba(245,185,66,.6))}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap}
+.navlinks a{
+  text-decoration:none;font-weight:700;font-size:var(--fs-small);color:var(--muted);
+  padding:7px 11px;border-radius:999px;transition:.2s;white-space:nowrap;
+}
+.navlinks a:hover{color:#fff;background:rgba(245,185,66,.16)}
+.menu-btn{display:none}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;padding:64px 0 84px;
+  background:
+    radial-gradient(900px 500px at 78% -8%, rgba(245,185,66,.22), transparent 60%),
+    radial-gradient(800px 600px at 8% 110%, rgba(43,198,181,.20), transparent 55%),
+    linear-gradient(180deg,var(--bg) 0%, var(--bg-alt) 100%);
+  overflow:hidden;
+}
+.stars{position:absolute;inset:0;pointer-events:none;z-index:2}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%;z-index:0}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:
+  linear-gradient(180deg, rgba(18,26,58,.45) 0%, rgba(17,26,57,.78) 70%, var(--bg-alt) 100%),
+  linear-gradient(90deg, rgba(15,21,48,.86) 0%, rgba(15,21,48,.42) 55%, rgba(15,21,48,.6) 100%)}
+.hero .wrap{position:relative;z-index:3;display:grid;grid-template-columns:1.12fr .88fr;gap:40px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(245,185,66,.16);border:1px solid rgba(245,185,66,.42);color:var(--gold-soft);padding:7px 14px;border-radius:999px;font-weight:800;font-size:var(--fs-small);letter-spacing:.14em;text-transform:uppercase}
+.hero h1{font-size:var(--fs-display);margin:18px 0 0;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.4)}
+.hero h1 .g6{color:var(--gold);position:relative;display:inline-block}
+.hero h1 .g6::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:10px;background:linear-gradient(90deg,var(--gold),var(--amber));opacity:.35;border-radius:8px;z-index:-1}
+.sub{font-size:var(--fs-body);color:var(--cloud);margin:18px 0 0;max-width:42ch}
+
+/* date badge + countdown */
+.datewrap{display:flex;align-items:center;gap:16px;margin-top:22px;flex-wrap:wrap}
+.datebadge{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fff,#f2ecdb);color:#1a2348;border-radius:14px;padding:10px 18px;box-shadow:var(--shadow);font-family:'Anton'}
+.datebadge .d{font-size:var(--fs-title);line-height:1}
+.datebadge .sep{color:var(--amber)}
+.datebadge small{font-family:'Archivo';font-weight:800;letter-spacing:.14em;font-size:var(--fs-small);color:#7a6a3e}
+.countdown{display:inline-flex;align-items:center;gap:8px;color:var(--gold-soft);font-weight:800;font-size:var(--fs-small);letter-spacing:.06em;text-transform:uppercase;border:1px dashed rgba(245,185,66,.5);padding:9px 14px;border-radius:12px}
+.countdown b{font-family:'Anton';font-size:var(--fs-title);color:#fff;letter-spacing:0}
+
+.cta{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn{cursor:pointer;border:none;font-family:'Archivo';font-weight:900;font-size:var(--fs-body);padding:13px 20px;border-radius:14px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:transform .15s, box-shadow .2s;line-height:1}
+.btn:active{transform:translateY(1px)}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--amber));color:#241803;box-shadow:0 12px 30px -10px rgba(245,185,66,.7)}
+.btn-gold:hover{transform:translateY(-2px)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid var(--line)}
+.btn-ghost:hover{background:rgba(255,255,255,.14)}
+.btn-sm{font-size:var(--fs-small);padding:10px 15px}
+
+/* boarding pass */
+.pass{position:relative;background:linear-gradient(150deg,#fffdf6,#efe6cf);color:#1a1810;border-radius:20px;box-shadow:var(--shadow);overflow:hidden;transform:rotate(2deg);transition:transform .3s}
+.pass:hover{transform:rotate(0deg) scale(1.015)}
+.pass .top{background:linear-gradient(135deg,var(--bg),var(--card));color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}
+.pass .top .code{font-family:'Anton';font-size:var(--fs-body);color:var(--gold)}
+.pass .top small{color:var(--muted);font-weight:700;letter-spacing:.12em;font-size:var(--fs-small);text-transform:uppercase;display:block}
+.pass .body{padding:16px 20px 6px;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center}
+.pass .field{display:flex;flex-direction:column;gap:2px}
+.pass .field .lbl{font-size:var(--fs-small);letter-spacing:.14em;text-transform:uppercase;color:#9b8e6b;font-weight:800}
+.pass .field .val{font-family:'Anton';font-size:var(--fs-title)}
+.pass .field .sm{color:#9b8e6b;font-weight:700;font-size:var(--fs-small)}
+.pass .arc{color:var(--amber);font-size:var(--fs-body)}
+.pass .row2{padding:2px 20px;display:flex;justify-content:space-between;font-weight:700;font-size:var(--fs-small);color:#4a4433}
+.pass .crew{padding:8px 20px 4px}
+.pass .crew .lbl{font-size:var(--fs-small);letter-spacing:.14em;text-transform:uppercase;color:#9b8e6b;font-weight:800;margin-bottom:6px}
+.pass .crew .people{display:flex;gap:8px;flex-wrap:wrap}
+.pass .cm{display:flex;align-items:center;gap:6px;background:#f3ead2;border:1px solid #e0d4ad;border-radius:999px;padding:3px 10px 3px 3px;font-weight:800;font-size:var(--fs-small);color:#3a3424}
+.pass .cm i{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--bg),var(--card));color:var(--gold);display:grid;place-items:center;font-style:normal;font-family:'Anton';font-size:var(--fs-small)}
+.pass .perf{border-top:2px dashed #c9bd9b;position:relative;margin-top:8px}
+.pass .perf::before,.pass .perf::after{content:"";position:absolute;top:-11px;width:22px;height:22px;border-radius:50%;background:var(--bg)}
+.pass .perf::before{left:-11px}
+.pass .perf::after{right:-11px}
+.pass .barcode{padding:13px 20px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.bars{display:flex;gap:2px;height:38px;align-items:stretch;flex:1}
+.bars i{display:block;background:#1a1810;width:3px}
+.pass .seat{font-family:'Anton';font-size:var(--fs-body);text-align:right;color:#1a1810}
+
+/* ---------- STAT STRIP ---------- */
+.stats{background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--bg-alt);padding:26px 18px;text-align:center;position:relative;transition:.25s}
+.stat:hover{background:#16203f}
+.stat .num{font-family:'Anton';font-size:var(--fs-h);color:var(--gold);line-height:1}
+.stat .lab{font-size:var(--fs-small);color:var(--muted);margin-top:8px;font-weight:700}
+.stat .tag{position:absolute;top:10px;right:10px;font-size:var(--fs-small);background:var(--belgian-red);color:#fff;padding:1px 7px;border-radius:999px;font-weight:900;transform:rotate(6deg)}
+
+/* ---------- SECTION HEADINGS ---------- */
+.shead{text-align:center;max-width:720px;margin:0 auto 46px}
+.shead .kicker{color:var(--meuse);font-weight:900;letter-spacing:.2em;text-transform:uppercase;font-size:var(--fs-small)}
+.shead h2{font-size:var(--fs-h);color:#fff;margin:12px 0 0}
+.shead p{color:var(--muted);margin:14px 0 0;font-size:var(--fs-body)}
+
+/* ---------- ROUTE ---------- */
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
+#map-route,#map-local{height:440px;border-radius:var(--r);border:1px solid var(--line);box-shadow:var(--shadow);z-index:1}
+.leaflet-container{background:#dfe6ef;font-family:'Archivo'}
+.route-card{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:14px}
+.leg{display:flex;gap:14px;align-items:flex-start}
+.leg .pin{flex:0 0 auto;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:1.1rem;background:rgba(245,185,66,.18);border:1px solid rgba(245,185,66,.4)}
+.leg .t{font-weight:900;color:#fff;font-size:var(--fs-body)}
+.leg .d{color:var(--muted);font-size:var(--fs-small);margin-top:2px}
+.leg .time{margin-left:auto;font-family:'JetBrains Mono';color:var(--gold-soft);font-weight:700;font-size:var(--fs-small);white-space:nowrap}
+.dashline{border:none;border-top:2px dashed var(--line);margin:0 0 0 16px;width:calc(100% - 16px)}
+
+/* ---------- TIMELINE ---------- */
+.day-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.day-tab{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--cloud);padding:12px 22px;border-radius:14px;font-weight:900;font-family:'Archivo';transition:.2s;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:140px;font-size:var(--fs-body)}
+.day-tab small{font-weight:700;color:var(--muted);font-size:var(--fs-small);letter-spacing:.1em;text-transform:uppercase}
+.day-tab.active{background:linear-gradient(135deg,var(--gold),var(--amber));color:#241803;border-color:transparent;box-shadow:0 12px 26px -12px rgba(245,185,66,.7)}
+.day-tab.active small{color:#5a3f06}
+.day{display:none}
+.day.active{display:block;animation:fade .5s ease}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.tline{position:relative;max-width:860px;margin:0 auto;padding-left:8px}
+.tline::before{content:"";position:absolute;left:30px;top:6px;bottom:6px;width:3px;background:linear-gradient(var(--gold),var(--meuse));border-radius:3px}
+.tevent{position:relative;padding:0 0 24px 70px}
+.tevent .dot{position:absolute;left:21px;top:2px;width:21px;height:21px;border-radius:50%;background:var(--bg);border:4px solid var(--gold);box-shadow:0 0 0 4px rgba(245,185,66,.14)}
+.tevent.meuse .dot{border-color:var(--meuse)}
+.tcard{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow);transition:.25s}
+.tcard:hover{transform:translateY(-3px);border-color:rgba(245,185,66,.4)}
+.tcard .hd{display:flex;align-items:center;gap:12px}
+.tcard .ico{flex:0 0 auto;width:46px;height:46px}
+.tcard .when{font-family:'JetBrains Mono';font-weight:700;color:var(--gold-soft);font-size:var(--fs-small)}
+.tcard h4{margin:2px 0 0;font-family:'Archivo';font-weight:900;font-size:var(--fs-title);color:#fff}
+.tcard p{margin:10px 0 0;color:var(--muted);font-size:var(--fs-body)}
+.tcard .pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.pill{font-size:var(--fs-small);font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(43,198,181,.16);color:#8defdf;border:1px solid rgba(43,198,181,.35)}
+.pill.gold{background:rgba(245,185,66,.16);color:var(--gold-soft);border-color:rgba(245,185,66,.35)}
+.pill.red{background:rgba(236,84,84,.16);color:#ffb0b0;border-color:rgba(236,84,84,.35)}
+.tcard a.link{color:var(--gold-soft);font-weight:800;text-decoration:none;border-bottom:1px dotted;font-size:var(--fs-small)}
+.note{margin-top:10px;font-size:var(--fs-small);color:#d6bd84;font-style:italic}
+
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.opt{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.2s}
+.opt:hover{border-color:var(--meuse);background:rgba(43,198,181,.08)}
+.opt.picked{border-color:var(--gold);background:rgba(245,185,66,.12)}
+.opt .on{font-weight:900;color:#fff;display:flex;align-items:center;gap:8px;font-size:var(--fs-title)}
+.opt .od{color:var(--cloud);font-size:var(--fs-body);margin-top:8px;line-height:1.5}
+.opt .vote{margin-top:12px;font-size:var(--fs-small);font-weight:800;color:var(--gold-soft)}
+
+/* ---------- GENERIC PANELS / CARDS ---------- */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
+.panel{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)}
+.panel h3{font-family:'Archivo';font-weight:900;color:#fff;font-size:var(--fs-title);display:flex;align-items:center;gap:10px}
+.panel p{color:var(--muted);font-size:var(--fs-body);margin:10px 0 0}
+.panel small{display:block;color:var(--muted);font-size:var(--fs-small);margin-top:12px;opacity:.85}
+.panel .btn{margin-top:16px}
+.tracks{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.tracks iframe{border-radius:12px;display:block;width:100%}
+.wx{margin-top:16px}
+.wxhead{color:var(--muted);font-size:var(--fs-small);margin-bottom:12px}
+.wxhead a{color:var(--gold-soft);font-weight:800}
+.wxgrid{display:flex;gap:10px}
+.wxday{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:14px 8px;text-align:center}
+.wxd{font-weight:800;color:var(--cloud);font-size:var(--fs-small)}
+.wxi{font-size:2.1rem;line-height:1;margin:8px 0}
+.wxt{font-weight:800;font-size:var(--fs-body)}
+.wxt b{color:var(--gold)}
+.wxp{color:var(--muted);font-size:var(--fs-small);margin-top:4px}
+.wxday.trip{border-color:var(--gold);background:rgba(245,185,66,.12)}
+
+/* ---------- GALLERY ---------- */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:.3s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-6px);border-color:rgba(245,185,66,.35)}
+.card .art{height:175px;position:relative;overflow:hidden}
+.card .art svg{position:absolute;inset:0;width:100%;height:100%}
+.card .meta{padding:18px 20px 22px}
+.card .meta h3{font-family:'Archivo';font-weight:900;font-size:var(--fs-title);color:#fff}
+.card .meta p{color:var(--muted);font-size:var(--fs-body);margin:10px 0 0}
+.fact{margin-top:14px;display:flex;gap:9px;align-items:flex-start;font-size:var(--fs-small);color:var(--gold-soft);background:rgba(245,185,66,.1);border:1px solid rgba(245,185,66,.2);padding:10px 12px;border-radius:12px}
+.fact b{color:#fff}
+
+/* ---------- BEER TOOL ---------- */
+.glass-stage{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:18px}
+.glass{position:relative;width:120px;height:190px}
+.glass svg{width:100%;height:100%}
+.beer-fill{transition:height .6s cubic-bezier(.2,.8,.2,1), fill .4s}
+.beer-name{font-family:'Anton';font-size:var(--fs-h);color:var(--gold);text-align:center;min-height:1.5em;transition:.3s}
+.beer-meta{color:var(--muted);font-weight:700;font-size:var(--fs-small)}
+.beer-note{color:var(--cloud);text-align:center;font-style:italic;min-height:2.4em;font-size:var(--fs-body);max-width:34ch}
+.fibre{margin-top:22px}
+.fibre .row{display:flex;justify-content:space-between;align-items:baseline;font-weight:800;font-size:var(--fs-body)}
+.fibre .row .v{font-family:'Anton';color:var(--meuse);font-size:var(--fs-h)}
+.bar{height:16px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px;border:1px solid var(--line)}
+.bar i{display:block;height:100%;width:2%;background:linear-gradient(90deg,var(--meuse),var(--gold));transition:width .6s}
+.fibremsg{margin-top:10px;font-size:var(--fs-small);color:var(--gold-soft);min-height:1.2em;font-weight:700}
+.combo-pop{position:fixed;inset:0;display:none;place-items:center;z-index:200;pointer-events:none}
+.combo-pop.show{display:grid;animation:fade .2s}
+.combo-pop b{font-family:'Anton';font-size:clamp(3rem,14vw,9rem);color:var(--gold);text-shadow:0 0 40px rgba(245,185,66,.8), 0 10px 30px rgba(0,0,0,.5);transform:rotate(-7deg);animation:combo .9s ease}
+@keyframes combo{0%{transform:scale(.3) rotate(-7deg);opacity:0}40%{transform:scale(1.12) rotate(-7deg);opacity:1}100%{transform:scale(1) rotate(-7deg);opacity:1}}
+
+/* ---------- INFO / CHECKLIST ---------- */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.infocard{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.infocard h3{font-family:'Archivo';font-weight:900;color:#fff;font-size:var(--fs-title);margin:0 0 6px}
+.infocard h3.mt{margin-top:22px}
+.infocard .addr{color:var(--muted);font-size:var(--fs-body);line-height:1.6}
+.infocard .addr a{color:var(--gold-soft);font-weight:800;text-decoration:none}
+.check{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:9px}
+.check li{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:.2s;user-select:none;font-size:var(--fs-body)}
+.check li:hover{border-color:var(--meuse)}
+.check li .box{flex:0 0 auto;width:22px;height:22px;border-radius:7px;border:2px solid var(--muted);display:grid;place-items:center;font-size:var(--fs-small);transition:.2s}
+.check li.done .box{background:var(--meuse);border-color:var(--meuse);color:#06231f}
+.check li.done .lab{text-decoration:line-through;color:var(--muted)}
+.check li .lab b{color:#fff}
+.contacts{display:flex;flex-direction:column;gap:11px;margin-top:6px}
+.contact{display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.04)}
+.contact .e{font-size:1.4rem}
+.contact .ct b{color:#fff;display:block;font-size:var(--fs-body)}
+.contact .ct span{color:var(--muted);font-size:var(--fs-small)}
+.contact a{margin-left:auto;color:var(--gold-soft);font-weight:800;text-decoration:none;white-space:nowrap;font-size:var(--fs-small)}
+
+/* QA EASTER EGG */
+.qa{margin-top:18px;background:rgba(236,84,84,.08);border:1px dashed rgba(236,84,84,.42);border-radius:16px;padding:20px;text-align:center}
+.qa .q{min-height:1.5em;font-family:'Anton';font-size:var(--fs-title);color:#fff;margin-top:12px}
+.qa .who{color:var(--muted);font-size:var(--fs-small);margin-top:6px}
+
+/* ---------- THANKS / MR V ---------- */
+.thanks{background:
+   radial-gradient(700px 400px at 50% 0%, rgba(245,185,66,.18), transparent 60%),
+   linear-gradient(180deg,var(--bg-alt),#0d1430);
+  border-top:1px solid var(--line);padding:78px 0 36px;text-align:center}
+.mrv{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;max-width:760px;margin:0 auto;text-align:left}
+.mrv-art{width:230px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.5))}
+.mrv h2{font-size:var(--fs-h);color:#fff}
+.mrv .gold{color:var(--gold)}
+.mrv p{color:var(--muted);margin-top:14px;font-size:var(--fs-body);line-height:1.6}
+.mrv .sig{font-family:'Anton';color:var(--gold-soft);font-size:var(--fs-title);margin-top:14px}
+footer{border-top:1px solid var(--line);padding:24px 0;text-align:center;color:var(--muted);font-size:var(--fs-small)}
+footer .gags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+footer .gags span{background:rgba(255,255,255,.05);border:1px solid var(--line);padding:5px 11px;border-radius:999px;font-weight:700}
+footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;color:#ffb0b0;background:rgba(236,84,84,.1);border:1px solid rgba(236,84,84,.3);padding:6px 13px;border-radius:999px;font-weight:700}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:34px}
+  .route-grid,.duo,.info-grid{grid-template-columns:1fr}
+  .gal{grid-template-columns:1fr 1fr}
+  .stats .grid{grid-template-columns:1fr 1fr}
+  .mrv{grid-template-columns:1fr;text-align:center}
+  .mrv-art{margin:0 auto}
+  .opts{grid-template-columns:1fr}
+  .navlinks{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--card);padding:12px;border-bottom:1px solid var(--line)}
+  .navlinks.open{display:flex}
+  .menu-btn{display:inline-grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#fff;width:42px;height:38px;border-radius:10px;cursor:pointer;font-size:1.1rem}
+}
+@media(max-width:560px){
+  .gal{grid-template-columns:1fr}
+  .pass{transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker">
+  <div class="run" id="tickRun">
+    <span class="star">✦</span><span>ALL COMBO</span>
+    <span class="star">✦</span><span>MAXIMUM FIBER DISTANCE?!?!</span>
+    <span class="star">✦</span><span>26–28 JUNI · ARDENNEN</span>
+    <span class="star">✦</span><span>FLY LIKE A G6</span>
+    <span class="star">✦</span><span>SPECIAAL​BIERTJE INCOMING</span>
+    <span class="star">✦</span><span>"I DON'T SEE HOW THIS IS RELEVANT" — ANTON</span>
+    <span class="star">✦</span><span>FLORIAN! NIET KLOTEN!</span>
+    <span class="star">✦</span><span>SPECIAL THANKS TO MR. V</span>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="inner">
+    <div class="brand"><span class="jet">✈️</span> FLY LIKE A G6</div>
+    <button class="menu-btn" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+    <div class="navlinks" id="navlinks">
+      <a href="#route">Route</a>
+      <a href="#onderweg">Onderweg</a>
+      <a href="#planning">Planning</a>
+      <a href="#kaart">Kaart</a>
+      <a href="#highlights">Highlights</a>
+      <a href="#bier">Bier</a>
+      <a href="#info">Info</a>
+      <a href="#thanks">Mr. V</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <img class="hero-photo" src="photos/group.jpg" alt="De mannen — Fly like a G6" onerror="this.remove()">
+  <div class="hero-overlay"></div>
+  <canvas class="stars" id="stars"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">✦ Weekendje weg · De Mannen</span>
+      <h1>FLY LIKE A <span class="g6">G6</span></h1>
+      <p class="sub">Een weekend aan de Maas, met speciaalbier, kayak, padel en maximale vezelafstand — diep in de Ardennen.</p>
+
+      <div class="datewrap">
+        <div class="datebadge">
+          <span class="d">VR&nbsp;26</span><span class="sep">→</span><span class="d">ZO&nbsp;28</span>
+          <small>JUNI 2026</small>
+        </div>
+        <div class="countdown" id="countdown">⏳ <b id="cdNum">…</b> tot vertrek</div>
+      </div>
+
+      <div class="cta">
+        <a href="#planning" class="btn btn-gold">📋 Bekijk de planning</a>
+        <a href="Draaiboek - Fly like a G6.pdf" target="_blank" class="btn btn-ghost">📄 Download draaiboek</a>
+      </div>
+    </div>
+
+    <!-- BOARDING PASS -->
+    <div class="pass" id="pass">
+      <div class="top">
+        <div><small>Boarding pass</small><div class="code">G6 · 2026</div></div>
+        <div style="font-size:1.8rem">✈️</div>
+      </div>
+      <div class="body">
+        <div class="field"><span class="lbl">From</span><span class="val">HLS</span><span class="sm">Halsteren</span></div>
+        <div class="arc">✈</div>
+        <div class="field" style="text-align:right"><span class="lbl">To</span><span class="val">LUS</span><span class="sm">Lustin · Bordure de Meuse</span></div>
+      </div>
+      <div class="row2"><span>VLUCHT&nbsp;&nbsp;G6-626</span><span>± 2 u rijden</span></div>
+      <div class="row2"><span>VERTREK&nbsp;&nbsp;VR 10:00</span><span>TESLA · MODEL&nbsp;Y ⚡</span></div>
+      <div class="crew">
+        <div class="lbl">Passengers</div>
+        <div class="people">
+          <span class="cm"><i>K</i>Koen</span>
+          <span class="cm"><i>F</i>Florian</span>
+          <span class="cm"><i>A</i>Anton</span>
+          <span class="cm"><i>V</i>Vincent</span>
+        </div>
+      </div>
+      <div class="perf"></div>
+      <div class="barcode">
+        <div class="bars" id="bars"></div>
+        <div class="seat">SEAT<br>ALL&nbsp;COMBO</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== STATS ===== -->
+<section class="stats">
+  <div class="wrap" style="padding:0">
+    <div class="grid">
+      <div class="stat"><div class="num" data-count="3">3</div><div class="lab">Dagen avontuur</div></div>
+      <div class="stat"><div class="num" data-count="4">4</div><div class="lab">Mannen aan boord</div></div>
+      <div class="stat"><div class="num">∞</div><div class="lab">Maximum fiber distance</div><span class="tag">?!?!</span></div>
+      <div class="stat"><div class="num">100%</div><div class="lab">All combo</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROUTE ===== -->
+<section class="pad" id="route">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kicker">Heenreis</div>
+      <h2>Van Halsteren naar de Maas</h2>
+      <p>Florian &amp; Anton halen Vincent op in Delft (±1 uur naar Halsteren), daar laden we de Tesla Model Y en vliegen we richting Lustin.</p>
+    </div>
+    <div class="route-grid">
+      <div id="map-route"></div>
+      <div class="route-card">
+        <div class="leg"><div class="pin">🚗</div><div><div class="t">Delft → Halsteren</div><div class="d">Florian &amp; Anton pikken Vincent op</div></div><div class="time">08:00</div></div>
+        <hr class="dashline">
+        <div class="leg"><div class="pin">⚡</div><div><div class="t">Meet &amp; greet + Tesla laden</div><div class="d">Koen sluit aan in Halsteren</div></div><div class="time">09:30</div></div>
+        <hr class="dashline">
+        <div class="leg"><div class="pin">🥪</div><div><div class="t">Vertrek + lunch onderweg</div><div class="d">Koen maakt een lekkere lunch to-go</div></div><div class="time">10:00</div></div>
+        <hr class="dashline">
+        <div class="leg"><div class="pin">🏰</div><div><div class="t">Aankomst regio Dinant</div><div class="d">±2 uur rijden — eerste halte: padel</div></div><div class="time">12:30</div></div>
+        <hr class="dashline">
+        <div class="leg"><div class="pin">🏡</div><div><div class="t">Check-in: Les pieds dans l'eau</div><div class="d">🏠 Onze accommodatie · Rue Rochers de Frène 2, Lustin</div></div><div class="time">16:30</div></div>
+        <a class="btn btn-ghost btn-sm" style="margin-top:4px" target="_blank" href="https://www.google.com/maps/dir/Halsteren,+Nederland/Rue+Rochers+de+Fr%C3%AAne+2,+5170+Profondeville,+Belgi%C3%AB">🗺️ Open route in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ONDERWEG / EXTRA'S ===== -->
+<section class="pad" id="onderweg" style="background:var(--bg-alt)">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kicker">Voor onderweg</div>
+      <h2>Playlist &amp; weerbericht</h2>
+      <p>Twee dingen voor in de Tesla: de juiste muziek en een blik op het weer aan de Maas.</p>
+    </div>
+    <div class="duo">
+      <div class="panel">
+        <h3>🎶 Onderweg-playlist</h3>
+        <p>Zet 'm op, ramen open, en vol (elektrisch) gas richting de Maas. Een paar verplichte nummers:</p>
+        <div class="tracks">
+          <iframe loading="lazy" src="https://open.spotify.com/embed/track/3ElTBPoswB96EEMzLBmGCz?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe loading="lazy" src="https://open.spotify.com/embed/track/10nZekHj7rpBPnn7VFaFBg?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe loading="lazy" src="https://open.spotify.com/embed/track/1NtuyUlYXc6wDP2zjFpquy?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe loading="lazy" src="https://open.spotify.com/embed/track/6VFWpxpQn7bnLt8XCh91Gk?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>☀️ Weer aan de Maas</h3>
+        <p>De verwachting voor het weekend in Lustin / Profondeville.</p>
+        <div id="weather" class="wx">Weer laden…</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLANNING / TIMELINE ===== -->
+<section class="pad" id="planning">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kicker">De tijdlijn</div>
+      <h2>Het programma</h2>
+      <p>Tik op een dag. Tik op de keuzes bij zaterdagmiddag om jullie favoriet te markeren.</p>
+    </div>
+
+    <div class="day-tabs">
+      <div class="day-tab active" data-day="vr"><span>VRIJDAG</span><small>26 juni</small></div>
+      <div class="day-tab" data-day="za"><span>ZATERDAG</span><small>27 juni</small></div>
+      <div class="day-tab" data-day="zo"><span>ZONDAG</span><small>28 juni</small></div>
+    </div>
+
+    <!-- VRIJDAG -->
+    <div class="day active" id="day-vr">
+      <div class="tline">
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_car}}</div><div><div class="when">08:00</div><h4>Florian &amp; Anton halen Vincent op</h4></div></div>
+          <p>Vertrek vanuit Delft, ±1 uur rijden naar Halsteren.</p>
+          <div class="pills"><span class="pill">Delft → Halsteren</span></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_key}}</div><div><div class="when">09:30</div><h4>Meet &amp; greet + Tesla laden</h4></div></div>
+          <p>Koen sluit aan in Halsteren. Even bijkletsen, koffers in de Model Y, accu vol.</p>
+          <div class="pills"><span class="pill gold">Tesla Model Y ⚡</span></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_car}}</div><div><div class="when">10:00</div><h4>Vertrek uit Halsteren</h4></div></div>
+          <p>Op weg naar België — ±2 uur rijden. Lunch onderweg: Koen maakt een lekkere lunch to-go.</p>
+          <div class="pills"><span class="pill gold">Lunch onderweg</span></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_padel}}</div><div><div class="when">12:30 – 13:30</div><h4>Padel @ Smash350</h4></div></div>
+          <p>Eerst even de benen strekken op de baan. Rue Saint-Jacques 350, Dinant — vandaar de "350". Wie pakt de eerste winst van het weekend?</p>
+          <div class="pills"><span class="pill gold">Warming-up</span><span class="pill">Competitie</span></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_citadel}}</div><div><div class="when">14:00 – 15:45</div><h4>Citadel van Dinant</h4></div></div>
+          <p>Gratis parkeren bij de Citadel. Entree €15 p.p. — inclusief <b>onbeperkt kabelbaan</b>. Rond 15:00 rondstruinen door Dinant met een eerste speciaalbiertje, daarna met de kabelbaan omhoog en weer terug.</p>
+          <div class="pills"><span class="pill gold">€15 p.p.</span><span class="pill">Kabelbaan ∞</span><span class="pill red">Speciaalbier</span></div>
+        </div></div>
+
+        <div class="tevent meuse"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_key}}</div><div><div class="when">16:30</div><h4>Check-in bij Les pieds dans l'eau</h4></div></div>
+          <p><b>Onze accommodatie</b> aan de boorden van de Maas. Koffers naar binnen, terras op en het eerste biertje van het verblijf openen.</p>
+          <div class="pills"><span class="pill gold">🏠 De accommodatie</span><span class="pill">Lustin · Bordure de Meuse</span></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_pizza}}</div><div><div class="when">17:30</div><h4>Pizza afhalen — Pizzeria Venezia</h4></div></div>
+          <p>Pizza's afhalen vlakbij de accommodatie.</p>
+          <div class="note">🇫🇷 Vincent even laten bellen met zijn goede Frans.</div>
+          <div class="pills"><span class="pill gold">Afhalen</span><a class="link" href="https://maps.app.goo.gl/hnUTXSGwChTUGS1q9" target="_blank" rel="noopener">📍 Route</a></div>
+        </div></div>
+
+      </div>
+    </div>
+
+    <!-- ZATERDAG -->
+    <div class="day" id="day-za">
+      <div class="tline">
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_meat}}</div><div><div class="when">Ochtend</div><h4>Ontbijt + vlees halen bij de lokale slager</h4></div></div>
+          <p>Rustig ontbijten en alvast het vlees voor de BBQ scoren bij de lokale slager.</p>
+          <div class="pills"><span class="pill red">BBQ-voorbereiding</span><a class="link" href="https://maps.app.goo.gl/yq2eL6gxedN3Mndi9" target="_blank" rel="noopener">📍 Slager</a></div>
+        </div></div>
+
+        <div class="tevent meuse"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_kayak}}</div><div><div class="when">10:30 / 11:00</div><h4>Kayakken op de Maas 🛶</h4></div></div>
+          <p>Vertrek vanuit <b>Yvoir Nautic</b>: 2× 1-persoons kano + 1× 2-persoons kayak. Onderweg lunchen we in een <b>leuk restaurantje langs de Maas</b> — plek nog uit te zoeken. Dé hoofdact van zaterdag.</p>
+          <div class="pills"><span class="pill">2× kano</span><span class="pill">1× kayak</span><span class="pill gold">🍽️ Lunchstop t.b.d.</span><a class="link" href="https://www.yvoirnautic.be/fr/" target="_blank" rel="noopener">🌐 Yvoir Nautic</a></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_beer}}</div><div><div class="when">Einde middag</div><h4>Keuzestress: 3 opties</h4></div></div>
+          <p>Eén beslissing te nemen voor de late namiddag. Tik je favoriet aan:</p>
+          <div class="opts" id="satOpts">
+            <div class="opt" data-opt="1"><div class="on">🧀 Optie 1</div><div class="od"><b>Maredsous</b> 16:00–17:30 — rondleiding microbrouwerij &amp; kaasmuseum van de Abdij.</div><div class="vote">Tik om te kiezen</div></div>
+            <div class="opt" data-opt="2"><div class="on">🍺 Optie 2</div><div class="od"><b>Maison Leffe</b>, Dinant 15:00–16:00 — €15 p.p., interactieve rondleiding, proeverij + cadeautje (max 1 uur).</div><div class="vote">Tik om te kiezen</div></div>
+            <div class="opt" data-opt="3"><div class="on">🏡 Optie 3</div><div class="od">Gewoon lekkere <b>speciaalbiertjes</b> bij de accommodatie, rond 16:00.</div><div class="vote">Tik om te kiezen</div></div>
+          </div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_bbq}}</div><div><div class="when">Avond</div><h4>BBQ aan de Maas 🔥</h4></div></div>
+          <p>De grote finale van de zaterdag: vlees van de slager op de BBQ, biertje erbij, voeten in (de buurt van) het water.</p>
+          <div class="pills"><span class="pill red">Grill on</span><span class="pill gold">All combo</span></div>
+        </div></div>
+
+      </div>
+    </div>
+
+    <!-- ZONDAG -->
+    <div class="day" id="day-zo">
+      <div class="tline">
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_bread}}</div><div><div class="when">Ochtend</div><h4>Licht ontbijt — broodjes &amp; co</h4></div></div>
+          <p>Rustig opstarten met broodjes en koffie voordat we de boel inpakken.</p>
+          <div class="pills"><span class="pill">Easy does it</span></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_key}}</div><div><div class="when">10:30</div><h4>Check-out accommodatie</h4></div></div>
+          <p>Spullen inladen in de Tesla en richting huis — met één strategische tussenstop.</p>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_fork}}</div><div><div class="when">12:30 – 13:00</div><h4>Lunch @ Brasserie de Berk</h4></div></div>
+          <p>Afsluitende lunch in Bergen op Zoom om het weekend waardig uit te luiden.</p>
+          <div class="pills"><span class="pill gold">Bergen op Zoom</span><span class="pill">Laatste ronde</span></div>
+        </div></div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOCAL MAP ===== -->
+<section class="pad" id="kaart" style="background:var(--bg-alt)">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kicker">De omgeving</div>
+      <h2>Kaartje van het speelveld</h2>
+      <p>Alles ligt mooi aan de Maas tussen Yvoir, Lustin en Dinant. Klik op de pinnen voor de details.</p>
+    </div>
+    <div id="map-local"></div>
+  </div>
+</section>
+
+<!-- ===== HIGHLIGHTS GALLERY ===== -->
+<section class="pad" id="highlights">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kicker">Te zien &amp; te doen</div>
+      <h2>Highlights van de regio</h2>
+      <p>Een gids langs de mooiste plekken van het weekend.</p>
+    </div>
+    <div class="gal" id="gallery"></div>
+  </div>
+</section>
+
+<!-- ===== BEER TOOL ===== -->
+<section class="pad" id="bier" style="background:var(--bg-alt)">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kicker">Grappig tooltje</div>
+      <h2>De Bier-o-meter 3000</h2>
+      <p>Draai aan het Belgische speciaalbier-rad en hou de <b>maximum fiber distance</b> in de gaten. Pas op voor de ALL COMBO.</p>
+    </div>
+    <div class="duo">
+      <div class="panel">
+        <h3>🎰 Speciaalbier-roulette</h3>
+        <div class="glass-stage">
+          <div class="glass">
+            <svg viewBox="0 0 120 190">
+              <defs>
+                <clipPath id="glassClip"><path d="M28 8 H92 L84 168 Q84 182 70 182 H50 Q36 182 36 168 Z"/></clipPath>
+              </defs>
+              <g clip-path="url(#glassClip)">
+                <rect x="0" y="0" width="120" height="190" fill="rgba(255,255,255,.05)"/>
+                <rect id="beerFill" class="beer-fill" x="0" y="190" width="120" height="0" fill="#f5b942"/>
+                <rect id="beerFoam" x="0" y="0" width="120" height="0" fill="#fff8e6"/>
+              </g>
+              <path d="M28 8 H92 L84 168 Q84 182 70 182 H50 Q36 182 36 168 Z" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3"/>
+              <path d="M40 22 L46 150" stroke="rgba(255,255,255,.28)" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="beer-name" id="beerName">Druk op draai…</div>
+          <div class="beer-meta" id="beerMeta">&nbsp;</div>
+          <div class="beer-note" id="beerNote">Het rad wijst je het volgende biertje aan. 🍺</div>
+          <button class="btn btn-gold" id="spinBtn">🎰 Draai het rad!</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>📏 Maximum fiber distance</h3>
+        <p>Elk biertje voegt op mysterieuze wijze vezelafstand toe. Niemand weet waarom. <i>I don't see how this is relevant.</i></p>
+        <div class="fibre">
+          <div class="row"><span>Vezelafstand</span><span class="v" id="fibreVal">0,0 km</span></div>
+          <div class="bar"><i id="fibreBar"></i></div>
+          <div class="fibremsg" id="fibreMsg">Nog 0 biertjes geteld.</div>
+        </div>
+        <div style="margin-top:24px;border-top:1px solid var(--line);padding-top:20px">
+          <div class="row" style="display:flex;justify-content:space-between;align-items:baseline;font-weight:800;font-size:var(--fs-body)">
+            <span>Biertjes getapt</span><span class="v" style="font-family:'Anton';color:var(--gold);font-size:var(--fs-h)" id="beerCount">0</span>
+          </div>
+          <small style="display:block;color:var(--muted);margin-top:8px">Verzamel er 6 voor een verrassing. 🎉</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INFO + CHECKLIST + QA ===== -->
+<section class="pad" id="info">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kicker">Praktisch</div>
+      <h2>Info &amp; dingen regelen</h2>
+    </div>
+    <div class="info-grid">
+
+      <div class="infocard">
+        <h3>🏡 De accommodatie</h3>
+        <p class="addr"><b style="color:#fff">Les pieds dans l'eau — Private Wellness</b><br>
+        Rue Rochers de Frène 2, 5170 Profondeville (Lustin)<br>
+        Aan de boorden van de Maas. Inbegrepen: 1 kayak + 1 paddleboard. Extra huren via Yvoir Nautic.<br>
+        <a href="https://www.booking.com/hotel/be/les-pieds-dans-l-eau-profondeville-lustin.nl.html" target="_blank" rel="noopener">→ Bekijk op Booking.com</a></p>
+
+        <h3 class="mt">✅ Dingen regelen</h3>
+        <ul class="check" id="checklist">
+          <li><span class="box">✓</span><span class="lab"><b>Koen</b> — algemene boodschappen + bier/drank</span></li>
+          <li><span class="box">✓</span><span class="lab">Ter plaatse: <b>vlees, groenten</b> etc. regelen</span></li>
+          <li><span class="box">✓</span><span class="lab">Vlees halen bij de <b>lokale slager</b> (zaterdag)</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Yvoir Nautic</b> mailen voor extra kano's</span></li>
+          <li><span class="box">✓</span><span class="lab">Padelbaan <b>Smash350</b> reserveren (vr 12:30)</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Vincent</b> laat zijn Frans los bij de pizzeria</span></li>
+        </ul>
+      </div>
+
+      <div class="infocard">
+        <h3>📇 Handige contacten</h3>
+        <div class="contacts">
+          <div class="contact"><span class="e">🛶</span><div class="ct"><b>Yvoir Nautic</b><span>Kano- &amp; kayakverhuur op de Maas</span></div><a href="mailto:info@yvoirnautic.be">info@yvoirnautic.be</a></div>
+          <div class="contact"><span class="e">🍕</span><div class="ct"><b>Pizzeria Venezia</b><span>Afhalen vlakbij — Vincent belt</span></div><a href="https://maps.app.goo.gl/hnUTXSGwChTUGS1q9" target="_blank" rel="noopener">Route →</a></div>
+          <div class="contact"><span class="e">🥩</span><div class="ct"><b>Lokale slager</b><span>Vlees voor de BBQ</span></div><a href="https://maps.app.goo.gl/yq2eL6gxedN3Mndi9" target="_blank" rel="noopener">Route →</a></div>
+          <div class="contact"><span class="e">🎾</span><div class="ct"><b>Smash350 Padel</b><span>Rue Saint-Jacques 350, Dinant</span></div><a href="https://smash350.be/" target="_blank" rel="noopener">Site →</a></div>
+        </div>
+
+        <h3 class="mt">🎒 Niet vergeten</h3>
+        <ul class="check" id="paklijst">
+          <li><span class="box">✓</span><span class="lab">Zwemkleding + handdoek (kayak)</span></li>
+          <li><span class="box">✓</span><span class="lab">Waterschoenen / oude sneakers</span></li>
+          <li><span class="box">✓</span><span class="lab">Zonnebrand + pet</span></li>
+          <li><span class="box">✓</span><span class="lab">Padel-rackets &amp; sportkleding</span></li>
+          <li><span class="box">✓</span><span class="lab">Laadpas Tesla + reisdocumenten</span></li>
+          <li><span class="box">✓</span><span class="lab">Droge zak / telefoonhoesje voor op het water</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- QA EASTER EGG (full width) -->
+    <div class="qa" style="max-width:680px;margin:26px auto 0">
+      <div style="font-weight:900;color:#fff;letter-spacing:.05em">🎤 De grote vragen van het weekend</div>
+      <div class="q" id="qaQ">…</div>
+      <div class="who" id="qaWho">&nbsp;</div>
+      <button class="btn btn-ghost btn-sm" style="margin-top:14px" id="qaBtn">Stel een vraag</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THANKS / MR V ===== -->
+<section class="thanks" id="thanks">
+  <div class="wrap">
+    <div class="mrv">
+      <div class="mrv-art">{{mrv}}</div>
+      <div>
+        <h2>Special thanks to <span class="gold">Mr. V</span></h2>
+        <p>Zonder hem geen Joint Strike Fighter, geen Ariane Racket, geen toiletten in het vliegtuig, geen perfecte timing en zeker geen <b style="color:#fff">all combo</b>. Een man, een legende, een cheque.</p>
+        <p class="sig">— Merci, Mr. V ✦</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="gags">
+      <span>✦ All combo</span>
+      <span>✦ Maximum fiber distance?!?!</span>
+      <span>✦ "I don't see how this is relevant" — Anton</span>
+      <span>✦ "Florian! Niet kloten!"</span>
+      <span>✦ Waar staat EASA voor? 🤔</span>
+      <span>✦ Duplo Fokker vliegtuig 🛩️</span>
+    </div>
+    Fly like a G6 · Weekendje weg in de Ardennen · 26–28 juni 2026 🍺✈️🛶
+    <div><span class="temp">⏳ Tijdelijke website — stopt op 29 juni 2026</span></div>
+  </footer>
+</section>
+
+<div class="combo-pop" id="comboPop"><b>ALL COMBO!</b></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+/* ============ ICON LIBRARY (inline SVG) ============ */
+const ICONS = {
+  ico_car:`<svg viewBox="0 0 48 48" fill="none"><path d="M8 32 L11 22 Q12 19 15 19 H33 Q36 19 37 22 L40 32 Z" fill="#e23b3b"/><path d="M14 22 H34 L36 30 H12 Z" fill="#1d2754"/><rect x="6" y="30" width="36" height="8" rx="3" fill="#c33"/><circle cx="15" cy="38" r="4" fill="#0a0e1f"/><circle cx="33" cy="38" r="4" fill="#0a0e1f"/><circle cx="15" cy="38" r="1.6" fill="#9aa6d4"/><circle cx="33" cy="38" r="1.6" fill="#9aa6d4"/><rect x="38" y="31" width="3" height="3" rx="1" fill="#f5b942"/></svg>`,
+  ico_padel:`<svg viewBox="0 0 48 48" fill="none"><ellipse cx="19" cy="17" rx="13" ry="14" fill="#2bc6b5"/><ellipse cx="19" cy="17" rx="13" ry="14" stroke="#0e7c72" stroke-width="2"/><g fill="#0a0e1f" opacity=".35"><circle cx="14" cy="12" r="1.6"/><circle cx="22" cy="12" r="1.6"/><circle cx="14" cy="20" r="1.6"/><circle cx="22" cy="20" r="1.6"/><circle cx="18" cy="16" r="1.6"/></g><rect x="16.5" y="29" width="5" height="14" rx="2.5" fill="#e08a1e"/><circle cx="36" cy="33" r="6" fill="#f5b942" stroke="#e08a1e" stroke-width="2"/><path d="M32 31 Q36 35 40 31" stroke="#fff" stroke-width="1.4" fill="none"/></svg>`,
+  ico_citadel:`<svg viewBox="0 0 48 48" fill="none"><path d="M4 42 L20 14 L40 30 L44 42 Z" fill="#5b6685"/><path d="M4 42 L20 14 L26 19 L10 42 Z" fill="#6e7aa0"/><rect x="22" y="24" width="14" height="18" fill="#cdd6f4"/><rect x="22" y="24" width="14" height="4" fill="#9aa6d4"/><path d="M22 24 h2 v-3 h2 v3 h2 v-3 h2 v3 h2 v-3 h2 v3" fill="#cdd6f4"/><rect x="26" y="30" width="3" height="5" fill="#0a0e1f"/><rect x="31" y="30" width="3" height="5" fill="#0a0e1f"/><line x1="6" y1="10" x2="40" y2="26" stroke="#f5b942" stroke-width="1.5"/><rect x="20" y="20" width="6" height="4" rx="1" fill="#e23b3b"/></svg>`,
+  ico_key:`<svg viewBox="0 0 48 48" fill="none"><circle cx="16" cy="18" r="9" fill="none" stroke="#f5b942" stroke-width="4"/><circle cx="16" cy="18" r="3" fill="#1d2754"/><path d="M22 24 L38 40 M34 36 l4 -4 M30 32 l3 -3" stroke="#f5b942" stroke-width="4" stroke-linecap="round" fill="none"/></svg>`,
+  ico_pizza:`<svg viewBox="0 0 48 48" fill="none"><path d="M24 6 L42 40 Q24 46 6 40 Z" fill="#f3c969"/><path d="M24 6 L42 40 Q24 46 6 40 Z" fill="none" stroke="#e08a1e" stroke-width="2"/><path d="M10 38 Q24 42 38 38" stroke="#d9534f" stroke-width="3" fill="none"/><circle cx="20" cy="22" r="3" fill="#e23b3b"/><circle cx="29" cy="26" r="3" fill="#e23b3b"/><circle cx="24" cy="33" r="3" fill="#e23b3b"/><circle cx="24" cy="14" r="2" fill="#3aa655"/><circle cx="17" cy="30" r="2" fill="#3aa655"/></svg>`,
+  ico_meat:`<svg viewBox="0 0 48 48" fill="none"><path d="M10 30 Q6 20 16 16 Q24 13 32 18 L40 26 Q44 30 40 34 Q36 38 30 36 L16 38 Q10 38 10 30 Z" fill="#d96b6b"/><path d="M14 30 Q12 24 18 22 Q24 20 28 24" stroke="#fff" stroke-width="2.5" fill="none" opacity=".6"/><rect x="36" y="22" width="9" height="5" rx="2.5" fill="#e7e2d3" transform="rotate(35 40 24)"/></svg>`,
+  ico_kayak:`<svg viewBox="0 0 48 48" fill="none"><path d="M4 28 Q24 22 44 28 Q24 40 4 28 Z" fill="#e23b3b"/><path d="M8 28 Q24 24 40 28 Q24 35 8 28 Z" fill="#1d2754"/><circle cx="24" cy="22" r="4" fill="#f5b942"/><rect x="22.5" y="24" width="3" height="6" fill="#2bc6b5"/><path d="M14 16 L34 30" stroke="#e08a1e" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="14" cy="16" rx="3" ry="2" fill="#e08a1e"/><ellipse cx="34" cy="30" rx="3" ry="2" fill="#e08a1e"/><path d="M4 34 q5 -3 10 0 t10 0 t10 0 t10 0" stroke="#2bc6b5" stroke-width="2" fill="none" opacity=".7"/></svg>`,
+  ico_beer:`<svg viewBox="0 0 48 48" fill="none"><rect x="12" y="14" width="20" height="28" rx="3" fill="#f5b942"/><rect x="12" y="14" width="20" height="7" rx="3" fill="#fff8e6"/><circle cx="16" cy="12" r="4" fill="#fff8e6"/><circle cx="23" cy="10" r="4.5" fill="#fff8e6"/><circle cx="29" cy="12" r="4" fill="#fff8e6"/><rect x="12" y="14" width="20" height="28" rx="3" fill="none" stroke="#e08a1e" stroke-width="2"/><path d="M32 20 h6 a3 3 0 0 1 3 3 v6 a3 3 0 0 1 -3 3 h-6" fill="none" stroke="#e08a1e" stroke-width="3"/><circle cx="19" cy="30" r="1.6" fill="#fff" opacity=".6"/><circle cx="25" cy="35" r="1.4" fill="#fff" opacity=".5"/></svg>`,
+  ico_bbq:`<svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="20" rx="16" ry="6" fill="#9aa6d4"/><path d="M8 20 Q24 30 40 20 L36 30 Q24 36 12 30 Z" fill="#5b6685"/><path d="M14 18 q2 -6 4 0 M22 18 q2 -7 4 0 M30 18 q2 -6 4 0" stroke="#e23b3b" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M16 19 q1.5 -4 3 0 M28 19 q1.5 -4 3 0" stroke="#f5b942" stroke-width="2" fill="none" stroke-linecap="round"/><line x1="14" y1="30" x2="11" y2="42" stroke="#9aa6d4" stroke-width="2.5"/><line x1="34" y1="30" x2="37" y2="42" stroke="#9aa6d4" stroke-width="2.5"/></svg>`,
+  ico_bread:`<svg viewBox="0 0 48 48" fill="none"><path d="M8 28 Q8 16 24 16 Q40 16 40 28 Q40 34 34 34 L14 34 Q8 34 8 28 Z" fill="#e8b773"/><path d="M8 28 Q8 16 24 16 Q40 16 40 28" fill="none" stroke="#c98f43" stroke-width="2"/><path d="M16 22 l2 4 M24 21 l0 5 M32 22 l-2 4" stroke="#c98f43" stroke-width="1.6" stroke-linecap="round"/><path d="M10 34 L38 34 L36 38 L12 38 Z" fill="#3aa655"/></svg>`,
+  ico_fork:`<svg viewBox="0 0 48 48" fill="none"><path d="M16 8 v12 a4 4 0 0 1 -8 0 V8 M12 8 v12 M20 8 v12 a4 4 0 0 1 -4 4 v16" stroke="#f5b942" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M32 8 q6 2 6 14 q0 6 -4 6 v12" stroke="#2bc6b5" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>`,
+};
+
+/* Mr. V cartoon */
+const MRV = `<svg viewBox="0 0 260 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5b942"/><stop offset="1" stop-color="#e08a1e"/></linearGradient>
+    <linearGradient id="tie" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a4a9c"/><stop offset="1" stop-color="#16306e"/></linearGradient>
+  </defs>
+  <circle cx="130" cy="120" r="118" fill="url(#bgv)"/>
+  <circle cx="130" cy="120" r="118" fill="none" stroke="#241803" stroke-width="4" opacity=".25"/>
+  <path d="M40 320 V250 Q40 196 130 196 Q220 196 220 250 V320 Z" fill="#1b2440"/>
+  <path d="M40 320 V250 Q40 196 130 196 Q220 196 220 250 V320 Z" fill="none" stroke="#0d1430" stroke-width="3"/>
+  <path d="M104 200 L130 232 L156 200 L156 320 L104 320 Z" fill="#f4f1e8"/>
+  <path d="M130 214 l-9 12 l9 70 l9 -70 Z" fill="url(#tie)"/>
+  <g stroke="#cdd6f4" stroke-width="3" opacity=".8"><path d="M122 226 l16 -10"/><path d="M124 244 l14 -10"/><path d="M126 262 l11 -9"/><path d="M128 280 l8 -8"/></g>
+  <path d="M104 200 L130 232 L116 206 Z" fill="#fff"/>
+  <path d="M156 200 L130 232 L144 206 Z" fill="#fff"/>
+  <path d="M116 178 h28 v18 q-14 12 -28 0 Z" fill="#e3a878"/>
+  <ellipse cx="130" cy="138" rx="52" ry="56" fill="#f0bb8a"/>
+  <ellipse cx="78" cy="140" rx="8" ry="12" fill="#e3a878"/>
+  <ellipse cx="182" cy="140" rx="8" ry="12" fill="#e3a878"/>
+  <path d="M78 132 Q70 78 130 74 Q192 78 184 134 Q188 104 168 92 Q176 104 168 110 Q170 92 150 84 Q158 98 150 100 Q150 84 130 82 Q112 84 110 100 Q100 90 96 104 Q92 92 80 108 Q74 120 78 132 Z" fill="#9a8d7a"/>
+  <path d="M78 132 Q70 78 130 74 Q150 75 164 84 Q140 80 120 86 Q98 94 90 116 Q82 124 78 132 Z" fill="#b3a690" opacity=".7"/>
+  <circle cx="78" cy="140" r="7" fill="#e3a878"/><circle cx="182" cy="140" r="7" fill="#e3a878"/>
+  <path d="M98 124 q12 -7 24 -1" stroke="#7d7060" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M138 123 q12 -6 24 1" stroke="#7d7060" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <g fill="none" stroke="#2b2b2b" stroke-width="3.5">
+    <rect x="92" y="128" width="34" height="26" rx="11"/>
+    <rect x="134" y="128" width="34" height="26" rx="11"/>
+    <path d="M126 138 q4 -3 8 0"/>
+    <path d="M92 136 l-12 -2"/><path d="M168 136 l12 -2"/>
+  </g>
+  <circle cx="109" cy="142" r="4" fill="#2b2b2b"/>
+  <circle cx="151" cy="142" r="4" fill="#2b2b2b"/>
+  <circle cx="110.5" cy="140.5" r="1.3" fill="#fff"/>
+  <circle cx="152.5" cy="140.5" r="1.3" fill="#fff"/>
+  <path d="M130 146 q5 12 -2 16 q-4 1 -6 -1" stroke="#d99a6a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M108 168 Q130 188 152 168" stroke="#a85a3a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M112 170 Q130 182 148 170 Q130 176 112 170 Z" fill="#fff"/>
+  <circle cx="100" cy="160" r="6" fill="#f0a07a" opacity=".4"/>
+  <circle cx="160" cy="160" r="6" fill="#f0a07a" opacity=".4"/>
+  <path d="M196 214 q14 -2 20 6 q3 6 -2 9 q-6 1 -9 -3 q-6 4 -11 -2 Z" fill="#e3a878" opacity=".95"/>
+  <g transform="rotate(-4 130 286)">
+    <rect x="44" y="262" width="172" height="54" rx="5" fill="#fbfaf3" stroke="#c9bd9b" stroke-width="2"/>
+    <rect x="44" y="262" width="172" height="13" rx="5" fill="#1b2440"/>
+    <text x="52" y="272" font-family="Anton, sans-serif" font-size="9" fill="#f5b942">CHEQUE · MR. V</text>
+    <text x="52" y="290" font-family="Archivo, sans-serif" font-weight="800" font-size="9" fill="#5a5240">ALL COMBO</text>
+    <text x="52" y="305" font-family="Anton, sans-serif" font-size="15" fill="#16306e">€ ∞ ,-</text>
+    <text x="150" y="305" font-family="JetBrains Mono, monospace" font-size="7" fill="#9b8e6b">max. fiber dist.</text>
+  </g>
+</svg>`;
+
+/* gallery icons (white-on-gradient variants) */
+const GICON = {
+  ico_padel:`<svg viewBox="0 0 48 48" fill="none"><ellipse cx="19" cy="17" rx="13" ry="14" fill="#0a0e1f" opacity=".25"/><ellipse cx="19" cy="17" rx="13" ry="14" fill="none" stroke="#fff" stroke-width="2"/><rect x="16.5" y="29" width="5" height="14" rx="2.5" fill="#fff"/><circle cx="36" cy="33" r="6" fill="#fff"/></svg>`,
+  ico_citadel:`<svg viewBox="0 0 48 48" fill="none"><path d="M4 42 L20 14 L40 30 L44 42 Z" fill="#fff" opacity=".25"/><rect x="22" y="24" width="14" height="18" fill="#fff"/><path d="M22 24 h2 v-3 h2 v3 h2 v-3 h2 v3 h2 v-3 h2 v3" fill="#fff"/><rect x="26" y="30" width="3" height="5" fill="#0a0e1f"/><rect x="31" y="30" width="3" height="5" fill="#0a0e1f"/></svg>`,
+  ico_beer:`<svg viewBox="0 0 48 48" fill="none"><rect x="12" y="14" width="20" height="28" rx="3" fill="#fff"/><circle cx="16" cy="12" r="4" fill="#fff"/><circle cx="23" cy="10" r="4.5" fill="#fff"/><circle cx="29" cy="12" r="4" fill="#fff"/><path d="M32 20 h6 a3 3 0 0 1 3 3 v6 a3 3 0 0 1 -3 3 h-6" fill="none" stroke="#fff" stroke-width="3"/></svg>`,
+  ico_kayak:`<svg viewBox="0 0 48 48" fill="none"><path d="M4 28 Q24 22 44 28 Q24 40 4 28 Z" fill="#fff"/><circle cx="24" cy="22" r="4" fill="#0a0e1f"/><path d="M14 16 L34 30" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+  ico_meat:`<svg viewBox="0 0 48 48" fill="none"><path d="M10 30 Q6 20 16 16 Q24 13 32 18 L40 26 Q44 30 40 34 Q36 38 30 36 L16 38 Q10 38 10 30 Z" fill="#fff"/><rect x="36" y="22" width="9" height="5" rx="2.5" fill="#fff" transform="rotate(35 40 24)"/></svg>`,
+  ico_bbq:`<svg viewBox="0 0 48 48" fill="none"><path d="M8 20 Q24 30 40 20 L36 30 Q24 36 12 30 Z" fill="#fff"/><path d="M14 18 q2 -6 4 0 M22 18 q2 -7 4 0 M30 18 q2 -6 4 0" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/><line x1="14" y1="30" x2="11" y2="42" stroke="#fff" stroke-width="2.5"/><line x1="34" y1="30" x2="37" y2="42" stroke="#fff" stroke-width="2.5"/></svg>`,
+};
+
+/* inject icons (targeted — never reassign body.innerHTML) */
+document.querySelectorAll('.tcard .ico').forEach(function(el){
+  var m=(el.textContent||'').match(/ico_[a-z]+/);
+  if(m && ICONS[m[0]]) el.innerHTML=ICONS[m[0]];
+});
+var _mrvEl=document.querySelector('.mrv-art');
+if(_mrvEl) _mrvEl.innerHTML=MRV;
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', init);
+if(document.readyState!=='loading') init();
+let _inited=false;
+function init(){
+  if(_inited) return; _inited=true;
+
+  /* starfield */
+  const cv=document.getElementById('stars');
+  if(cv){
+    const ctx=cv.getContext('2d');
+    function size(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;}
+    size();window.addEventListener('resize',size);
+    const N=90,st=[];
+    for(let i=0;i<N;i++)st.push({x:Math.random(),y:Math.random(),r:Math.random()*1.6+.3,t:Math.random()*6});
+    function draw(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      const tm=performance.now()/1000;
+      st.forEach(s=>{const a=.35+.45*Math.sin(tm*1.5+s.t);ctx.fillStyle=`rgba(245,210,140,${a})`;ctx.beginPath();ctx.arc(s.x*cv.width,s.y*cv.height,s.r,0,7);ctx.fill();});
+      requestAnimationFrame(draw);
+    }draw();
+  }
+
+  /* countdown */
+  const cdNum=document.getElementById('cdNum');
+  if(cdNum){
+    const target=new Date('2026-06-26T10:00:00');
+    function upd(){
+      const now=new Date();
+      const days=Math.ceil((target-now)/86400000);
+      if(days>1) cdNum.textContent=days+' dagen';
+      else if(days===1) cdNum.textContent='1 dag';
+      else if(days===0) cdNum.textContent='vandaag!';
+      else cdNum.parentElement.innerHTML='✈️ <b>Onderweg / geweest!</b>';
+    }
+    upd();setInterval(upd,3600000);
+  }
+
+  /* barcode */
+  function seeded(n){const x=Math.sin(n*99.13)*1000;return x-Math.floor(x);}
+  const bars=document.getElementById('bars');
+  if(bars){let h='';for(let i=0;i<46;i++){const w=(Math.floor(seeded(i)*3)+1);h+=`<i style="width:${w}px;opacity:${seeded(i+9)>.5?1:.55}"></i>`;}bars.innerHTML=h;}
+
+  /* count up */
+  document.querySelectorAll('.num[data-count]').forEach(el=>{
+    const tgt=+el.dataset.count;let c=0;
+    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const t=setInterval(()=>{c++;el.textContent=c;if(c>=tgt)clearInterval(t);},120);io.disconnect();}});});
+    io.observe(el);
+  });
+
+  /* day tabs */
+  document.querySelectorAll('.day-tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.day').forEach(d=>d.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('day-'+tab.dataset.day).classList.add('active');
+    });
+  });
+
+  /* saturday options */
+  document.querySelectorAll('#satOpts .opt').forEach(o=>{
+    o.addEventListener('click',()=>{
+      document.querySelectorAll('#satOpts .opt').forEach(x=>{x.classList.remove('picked');x.querySelector('.vote').textContent='Tik om te kiezen';});
+      o.classList.add('picked');o.querySelector('.vote').textContent='✓ Dit wordt \'m!';
+    });
+  });
+
+  /* checklists */
+  document.querySelectorAll('#checklist li, #paklijst li').forEach(li=>li.addEventListener('click',()=>li.classList.toggle('done')));
+
+  /* gallery */
+  const G=[
+    {ico:'ico_citadel',ph:'photos/citadel.jpg',c1:'#5b6685',c2:'#2b3354',t:'Citadel van Dinant',d:'Hoog boven de stad, bereikbaar via 408 treden óf — verstandiger — de kabelbaan. Spectaculair uitzicht over de Maas en de beroemde Collégiale.',f:'Adolphe Sax, uitvinder van de saxofoon, is geboren in Dinant.'},
+    {ico:'ico_beer',ph:'photos/leffe.jpg',c1:'#caa24a',c2:'#6e5316',t:'Speciaalbier & Leffe',d:'De abdij van Leffe ligt pal in Dinant. In Maison Leffe proef je de geschiedenis met rondleiding, proeverij én een cadeautje.',f:'Tip: combineer met een lokale "Couque de Dinant" — keihard maar legendarisch.'},
+    {ico:'ico_kayak',ph:'photos/kayak.jpg',c1:'#2bc6b5',c2:'#0a5c54',t:'Kayakken op de Maas',d:'Het kalme water tussen Yvoir en Dinant is perfect voor een ontspannen tocht. 2 kano\'s + 1 kayak vanuit Yvoir Nautic.',f:'Lunch onderweg op een zandbankje = peak weekendje weg.'},
+    {ico:'ico_meat',ph:'photos/maredsous.jpg',c1:'#3aa655',c2:'#155c2c',t:'Abdij van Maredsous',d:'Microbrouwerij, kaasmuseum en die heerlijke abdijbieren. Een rustige groene plek midden in de Ardennen.',f:'Maredsous-kaas + tripel = wetenschappelijk bewezen all combo.'},
+    {ico:'ico_padel',ph:'photos/padel.jpg',c1:'#e08a1e',c2:'#8a4d0c',t:'Padel @ Smash350',d:'Even knallen op de baan voor de eerste adrenaline van het weekend. Winnaars trakteren, verliezers ook.',f:'Het adres? Rue Saint-Jacques 350 — daar komt de naam vandaan.'},
+    {ico:'ico_bbq',ph:'photos/bbq.jpg',c1:'#e23b3b',c2:'#7a1717',t:'BBQ aan het water',d:'Vlees van de lokale slager, biertje van Koen, zon onder over de Maas. De avond waar het hele weekend naartoe werkt.',f:'Maximum fiber distance bereikt zijn piek rond de derde worst.'},
+  ];
+  const gal=document.getElementById('gallery');
+  if(gal){gal.innerHTML=G.map(g=>`
+    <div class="card">
+      <div class="art" style="background:linear-gradient(160deg,${g.c1},${g.c2})">
+        <div style="position:absolute;inset:0;display:grid;place-items:center;opacity:.95;transform:scale(1.6)">${GICON[g.ico]||''}</div>
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.18),transparent 60%)"></div>
+        <img src="${g.ph}" alt="${g.t}" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2">
+      </div>
+      <div class="meta">
+        <h3>${g.t}</h3>
+        <p>${g.d}</p>
+        <div class="fact">💡 <span><b>Wist je dat?</b> ${g.f}</span></div>
+      </div>
+    </div>`).join('');}
+
+  /* beer roulette */
+  const BEERS=[
+    {n:'Leffe Blonde',ty:'Blond · 6,6%',col:'#f3c34a',note:'Zacht, kruidig, gevaarlijk drinkbaar. De thuiswedstrijd van dit weekend.'},
+    {n:'Maredsous 8',ty:'Bruin · 8,0%',col:'#8a4a1e',note:'Karamel & gedroogd fruit. Rechtstreeks van de abdij verderop.'},
+    {n:'La Chouffe',ty:'Blond · 8,0%',col:'#e8a93a',note:'Met het kabouter​tje op het etiket. Fruitig en stiekem sterk.'},
+    {n:'Duvel',ty:'Sterk blond · 8,5%',col:'#efd178',note:'De duivel zelf. Bruist als champagne, slaat als een mokerslag.'},
+    {n:'Orval',ty:'Trappist · 6,2%',col:'#c8772a',note:'Wild gist, droog en funky. Voor de echte bierkenner aan tafel.'},
+    {n:'Tripel Karmeliet',ty:'Tripel · 8,4%',col:'#e9b94e',note:'Drie granen, honingzoet. Smaakt naar overwinning.'},
+    {n:'Kwak',ty:'Amber · 8,4%',col:'#b9601f',note:'Komt in dat rare koetsiersglas. Foto verplicht.'},
+    {n:'Westmalle Dubbel',ty:'Trappist · 7,0%',col:'#6e3b15',note:'Donker, broodachtig, monnik-approved.'},
+  ];
+  let beerIdx=0,count=0,fibre=0,spinning=false;
+  const fill=document.getElementById('beerFill'),foam=document.getElementById('beerFoam');
+  const bName=document.getElementById('beerName'),bMeta=document.getElementById('beerMeta'),bNote=document.getElementById('beerNote');
+  const spin=document.getElementById('spinBtn');
+  const fibreVal=document.getElementById('fibreVal'),fibreBar=document.getElementById('fibreBar'),fibreMsg=document.getElementById('fibreMsg'),beerCount=document.getElementById('beerCount');
+  function setBeer(b){
+    bName.textContent=b.n;bMeta.textContent=b.ty;bNote.textContent='“'+b.note+'”';
+    fill.setAttribute('fill',b.col);fill.setAttribute('y','30');fill.setAttribute('height','160');
+    foam.setAttribute('y','22');foam.setAttribute('height','12');
+  }
+  const FMSG=['Nog 0 biertjes geteld.','Eerste rondje! 🍺','Het loopt lekker…','Maximum fiber distance stijgt verdacht snel.','I don\'t see how this is relevant.','Bijna ALL COMBO…','MAXIMALE VEZELAFSTAND BEREIKT?!?!'];
+  if(spin) spin.addEventListener('click',()=>{
+    if(spinning)return;spinning=true;spin.disabled=true;
+    let ticks=0;const maxT=14+Math.floor(Math.random()*6);
+    fill.setAttribute('y','190');fill.setAttribute('height','0');foam.setAttribute('height','0');
+    const iv=setInterval(()=>{
+      beerIdx=(beerIdx+1)%BEERS.length;
+      bName.textContent=BEERS[beerIdx].n;bMeta.textContent=BEERS[beerIdx].ty;bName.style.opacity=.5;
+      ticks++;
+      if(ticks>=maxT){
+        clearInterval(iv);bName.style.opacity=1;
+        setBeer(BEERS[beerIdx]);
+        count++;beerCount.textContent=count;
+        fibre+=Math.round((Math.random()*40+10)*10)/10;
+        fibreVal.textContent=fibre.toFixed(1).replace('.',',')+' km';
+        fibreBar.style.width=Math.min(100,fibre/3)+'%';
+        fibreMsg.textContent=FMSG[Math.min(count,FMSG.length-1)];
+        if(count>0&&count%6===0)combo();
+        if(Math.random()<0.18)combo();
+        spinning=false;spin.disabled=false;
+      }
+    },90);
+  });
+
+  const pop=document.getElementById('comboPop');
+  function combo(){if(!pop)return;pop.classList.add('show');setTimeout(()=>pop.classList.remove('show'),1100);}
+
+  /* Q&A / Anton easter egg */
+  const QA=[
+    {q:'Anton, waar staat EASA voor?',w:'— Koen, met een grijns'},
+    {q:'I don\'t see how this is relevant.',w:'— Anton (het is European Union Aviation Safety Agency, maar goed)'},
+    {q:'Florian! Niet kloten!',w:'— anoniem, meermaals dit weekend'},
+    {q:'Maar wat ís nou de maximum fiber distance?',w:'— iedereen, op enig moment'},
+    {q:'I don\'t see how this is relevant.',w:'— Anton, nog steeds'},
+    {q:'All combo of geen combo?',w:'— de eeuwige vraag'},
+    {q:'I don\'t see how this is relevant.',w:'— Anton, voor de zekerheid nog een keer'},
+  ];
+  let gi=0;
+  const gQ=document.getElementById('qaQ'),gW=document.getElementById('qaWho'),gBtn=document.getElementById('qaBtn');
+  if(gBtn) gBtn.addEventListener('click',()=>{
+    const g=QA[gi%QA.length];gi++;
+    gQ.style.opacity=0;gW.style.opacity=0;
+    setTimeout(()=>{gQ.textContent='“'+g.q+'”';gW.textContent=g.w;gQ.style.transition='opacity .3s';gW.style.transition='opacity .3s';gQ.style.opacity=1;gW.style.opacity=.9;},150);
+  });
+
+  document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
+
+  initMaps();
+  loadWeather();
+}
+
+/* ---- weather via Open-Meteo (no API key, reliable; werkt bij livegang) ---- */
+function wmoIcon(c){
+  if(c===0)return'☀️';
+  if(c===1||c===2)return'🌤️';
+  if(c===3)return'☁️';
+  if(c===45||c===48)return'🌫️';
+  if(c>=51&&c<=57)return'🌦️';
+  if((c>=61&&c<=65)||(c>=80&&c<=82))return'🌧️';
+  if((c>=66&&c<=67)||(c>=71&&c<=77)||c===85||c===86)return'🌨️';
+  if(c>=95)return'⛈️';
+  return'🌡️';
+}
+function loadWeather(){
+  const el=document.getElementById('weather'); if(!el) return;
+  const lat=50.379, lon=4.875, start='2026-06-26', end='2026-06-28';
+  const today=new Date(); today.setHours(0,0,0,0);
+  const tripStart=new Date(start+'T00:00:00'), tripEnd=new Date(end+'T23:59:59');
+  const daysUntil=Math.round((tripStart-today)/86400000);
+  const inRange = daysUntil<=15 && tripEnd>=today;     // Open-Meteo: ~16 dagen vooruit
+  const months=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+  const dows=['zo','ma','di','wo','do','vr','za'];
+  let url='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+
+    '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FBrussels';
+  url += inRange ? ('&start_date='+start+'&end_date='+end) : '&forecast_days=3';
+  fetch(url).then(r=>r.json()).then(d=>{
+    const t=d.daily; if(!t||!t.time) throw 0;
+    let cells='';
+    for(let i=0;i<t.time.length;i++){
+      const dt=new Date(t.time[i]+'T12:00:00');
+      const isTrip = t.time[i]>=start && t.time[i]<=end;
+      cells+='<div class="wxday'+(isTrip?' trip':'')+'">'+
+        '<div class="wxd">'+dows[dt.getDay()]+' '+dt.getDate()+' '+months[dt.getMonth()]+'</div>'+
+        '<div class="wxi">'+wmoIcon(t.weather_code[i])+'</div>'+
+        '<div class="wxt"><b>'+Math.round(t.temperature_2m_max[i])+'°</b> / '+Math.round(t.temperature_2m_min[i])+'°</div>'+
+        '<div class="wxp">💧 '+(t.precipitation_probability_max[i]==null?'–':t.precipitation_probability_max[i]+'%')+'</div></div>';
+    }
+    const head = inRange
+      ? 'Verwachting voor het weekend (26–28 juni):'
+      : 'De verwachting voor 26–28 juni verschijnt hier zodra die beschikbaar is (±2 weken vooraf). Nu in de regio:';
+    el.innerHTML='<div class="wxhead">'+head+'</div><div class="wxgrid">'+cells+'</div>';
+  }).catch(()=>{
+    el.innerHTML='<div class="wxhead">Weer is even niet op te halen — <a href="https://www.google.com/search?q=weer+Profondeville+26+juni" target="_blank" rel="noopener">bekijk de verwachting →</a></div>';
+  });
+}
+
+function initMaps(){
+  if(typeof L==='undefined')return;
+  const tiles=()=>L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
+    attribution:'© OpenStreetMap, © CARTO',maxZoom:19,subdomains:'abcd'});
+  const gold='#e08a1e',meuse='#0e7c72',red='#e23b3b';
+  function dot(color){return L.divIcon({className:'',html:`<div style="width:18px;height:18px;border-radius:50%;background:${color};border:3px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.4)"></div>`,iconSize:[18,18],iconAnchor:[9,9]});}
+
+  const r=document.getElementById('map-route');
+  if(r){
+    const map=L.map('map-route',{scrollWheelZoom:false}).setView([51.2,4.6],8);
+    tiles().addTo(map);
+    const pts=[
+      {ll:[52.0116,4.3571],t:'Delft — start',c:gold},
+      {ll:[51.3847,4.2772],t:'Halsteren — meet & greet',c:gold},
+      {ll:[50.3790,4.8750],t:'🏡 Les pieds dans l\'eau · Lustin (accommodatie)',c:red},
+    ];
+    pts.forEach(p=>L.marker(p.ll,{icon:dot(p.c)}).addTo(map).bindPopup('<b>'+p.t+'</b>'));
+    map.fitBounds(pts.map(p=>p.ll),{padding:[45,45]});
+    const coords=pts.map(p=>p.ll[1]+','+p.ll[0]).join(';');
+    let drawn=false;
+    fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson')
+      .then(res=>res.json()).then(d=>{
+        if(d.routes&&d.routes[0]){
+          drawn=true;
+          const line=L.geoJSON(d.routes[0].geometry,{style:{color:gold,weight:5,opacity:.92,lineCap:'round'}}).addTo(map);
+          map.fitBounds(line.getBounds(),{padding:[45,45]});
+          const km=Math.round(d.routes[0].distance/1000);
+          const info=L.control({position:'bottomleft'});
+          info.onAdd=function(){const div=L.DomUtil.create('div');div.style.cssText='background:#fff;color:#1a2348;padding:6px 11px;border-radius:10px;font-weight:800;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.3)';div.innerHTML='🚗 Delft → Halsteren → Lustin · ≈ '+km+' km';return div;};
+          info.addTo(map);
+        }
+      }).catch(()=>{}).finally(()=>{
+        if(!drawn) L.polyline(pts.map(p=>p.ll),{color:gold,weight:4,opacity:.85,dashArray:'2 10',lineCap:'round'}).addTo(map);
+      });
+  }
+
+  const lc=document.getElementById('map-local');
+  if(lc){
+    const map=L.map('map-local',{scrollWheelZoom:false}).setView([50.33,4.89],12);
+    tiles().addTo(map);
+    const poi=[
+      {ll:[50.3790,4.8750],t:'🏡 Les pieds dans l\'eau',d:'Accommodatie · Rue Rochers de Frène 2, Lustin',c:red},
+      {ll:[50.3280,4.8810],t:'🛶 Yvoir Nautic',d:'Start kayaktocht',c:meuse},
+      {ll:[50.2592,4.9145],t:'🏰 Citadel van Dinant',d:'Entree €15 · kabelbaan ∞',c:gold},
+      {ll:[50.2604,4.9123],t:'🍺 Dinant centrum / Maison Leffe',d:'Speciaalbier & saxofoon',c:gold},
+      {ll:[50.3289,4.7672],t:'🧀 Abdij van Maredsous',d:'Brouwerij & kaasmuseum',c:meuse},
+      {ll:[50.2674,4.9376],t:'🎾 Smash350 Padel',d:'Rue Saint-Jacques 350, Dinant',c:gold},
+    ];
+    poi.forEach(p=>L.marker(p.ll,{icon:dot(p.c)}).addTo(map).bindPopup('<b>'+p.t+'</b><br><span style="color:#555">'+p.d+'</span>'));
+    map.fitBounds(poi.map(p=>p.ll),{padding:[50,50]});
+  }
+}
+</script>
+</body>
+</html>
