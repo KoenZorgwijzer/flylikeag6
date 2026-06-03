@@ -277,8 +277,9 @@ nav .inner{display:flex;align-items:center;gap:18px;justify-content:space-betwee
 .combo-pop{position:fixed;inset:0;display:none;place-items:center;z-index:200;pointer-events:none}
 .combo-pop.show{display:grid;animation:fade .2s}
 /* Jamaica Jimmy easter egg */
-.jimmy-trigger{margin-top:14px;background:none;border:none;cursor:pointer;font-size:1.5rem;opacity:.45;transition:.2s;line-height:1}
-.jimmy-trigger:hover{opacity:1;transform:scale(1.2) rotate(-8deg)}
+.jimmy-trigger{margin-top:14px;background:none;border:none;cursor:pointer;font-size:1.7rem;opacity:.75;line-height:1;transform-origin:bottom center;animation:palmwobble 2.4s ease-in-out infinite}
+.jimmy-trigger:hover{opacity:1;animation-duration:.45s}
+@keyframes palmwobble{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
 .jimmy-pop{position:fixed;inset:0;display:none;place-items:center;z-index:210;background:rgba(8,11,26,.72);padding:20px;cursor:pointer}
 .jimmy-pop.show{display:grid;animation:fade .25s}
 .jimmy-card{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:22px;padding:26px;max-width:360px;text-align:center;box-shadow:var(--shadow);animation:combo .5s ease}
@@ -487,11 +488,11 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
         <hr class="dashline">
         <div class="leg"><div class="pin">⚡</div><div><div class="t">Aankomst bij Koen in Halsteren</div><div class="d">Koen woont hier — meet &amp; greet + Tesla laden</div></div><div class="time">09:30</div></div>
         <hr class="dashline">
-        <div class="leg"><div class="pin">🥪</div><div><div class="t">Vertrek + lunch onderweg</div><div class="d">Koen maakt een lekkere lunch to-go</div></div><div class="time">10:00</div></div>
+        <div class="leg"><div class="pin">🚗</div><div><div class="t">Vertrek uit Halsteren</div><div class="d">±2 uur rijden — eerste bestemming: Citadel van Dinant</div></div><div class="time">10:00</div></div>
         <hr class="dashline">
-        <div class="leg"><div class="pin">🏰</div><div><div class="t">Aankomst regio Dinant</div><div class="d">±2 uur rijden — eerste halte: padel</div></div><div class="time">12:30</div></div>
+        <div class="leg"><div class="pin">🏰</div><div><div class="t">Citadel, lunch &amp; Maison Leffe in Dinant</div><div class="d">Citadel → lunch → Leffe-rondleiding</div></div><div class="time">12:30</div></div>
         <hr class="dashline">
-        <div class="leg"><div class="pin">🏡</div><div><div class="t">Check-in: Les pieds dans l'eau</div><div class="d">🏠 Onze accommodatie · Rue Rochers de Frène 2, Lustin</div></div><div class="time">16:30</div></div>
+        <div class="leg"><div class="pin">🏡</div><div><div class="t">Check-in: Les pieds dans l'eau</div><div class="d">🏠 Onze accommodatie · Rue Rochers de Frène 2, Lustin</div></div><div class="time">±16:15</div></div>
         <a class="btn btn-ghost btn-sm" style="margin-top:4px" target="_blank" href="https://www.google.com/maps/dir/Halsteren,+Nederland/Rue+Rochers+de+Fr%C3%AAne+2,+5170+Profondeville,+Belgi%C3%AB">🗺️ Open route in Google Maps</a>
       </div>
     </div>
@@ -561,25 +562,37 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
 
         <div class="tevent"><div class="dot"></div><div class="tcard">
           <div class="hd"><div class="ico">{{ico_car}}</div><div><div class="when">10:00</div><h4>Vertrek uit Halsteren</h4></div></div>
-          <p>Op weg naar België — ±2 uur rijden. Lunch onderweg: Koen maakt een lekkere lunch to-go.</p>
-          <div class="pills"><span class="pill gold">Lunch onderweg</span></div>
+          <p>Op weg naar België — ±2 uur rijden. Eerste bestemming: de <b>Citadel van Dinant</b>.</p>
+          <div class="pills"><span class="pill gold">Eerste stop: Citadel</span></div>
         </div></div>
 
         <div class="tevent"><div class="dot"></div><div class="tcard">
-          <div class="hd"><div class="ico">{{ico_padel}}</div><div><div class="when">12:30 – 13:30</div><h4>Padel @ Smash350</h4></div></div>
-          <p>Eerst even de benen strekken op de baan. Rue Saint-Jacques 350, Dinant — vandaar de "350". Wie pakt de eerste winst van het weekend?</p>
-          <div class="note">🎾 Koen heeft in principe 4 rackets + ballen bij zich.</div>
-          <div class="pills"><span class="pill gold">Warming-up</span><span class="pill">Competitie</span></div>
+          <div class="hd"><div class="ico">{{ico_citadel}}</div><div><div class="when">±12:30</div><h4>Citadel van Dinant</h4></div></div>
+          <p>Parkeren bij de Citadel (gratis). Entree €15 p.p. — inclusief <b>onbeperkt kabelbaan</b>. Even de citadel bezoeken en rondlopen met uitzicht over de Maas.</p>
+          <div class="pills"><span class="pill gold">€15 p.p.</span><span class="pill">Kabelbaan ∞</span></div>
         </div></div>
 
         <div class="tevent"><div class="dot"></div><div class="tcard">
-          <div class="hd"><div class="ico">{{ico_citadel}}</div><div><div class="when">14:00 – 15:45</div><h4>Citadel van Dinant</h4></div></div>
-          <p>Gratis parkeren bij de Citadel. Entree €15 p.p. — inclusief <b>onbeperkt kabelbaan</b>. Rond 15:00 rondstruinen door Dinant met een eerste speciaalbiertje, daarna met de kabelbaan omhoog en weer terug.</p>
-          <div class="pills"><span class="pill gold">€15 p.p.</span><span class="pill">Kabelbaan ∞</span><span class="pill red">Speciaalbier</span></div>
+          <div class="hd"><div class="ico">{{ico_fork}}</div><div><div class="when">±13:00</div><h4>Lunch in Dinant</h4></div></div>
+          <p>Met de kabelbaan (of de trap) naar beneden en lekker lunchen in Dinant.</p>
+          <div class="note">🍽️ Lunchplek wordt nog toegevoegd.</div>
+          <div class="pills"><span class="pill">Dinant centrum</span></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_beer}}</div><div><div class="when">14:30</div><h4>Maison Leffe — rondleiding</h4></div></div>
+          <p>Interactieve tour door Maison Leffe (±45 min – max 1 uur): de geschiedenis, een <b>proeverij</b> én een cadeautje. €15 p.p.</p>
+          <div class="pills"><span class="pill gold">€15 p.p.</span><span class="pill red">Proeverij</span></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_citadel}}</div><div><div class="when">15:45</div><h4>Kabelbaan weer omhoog</h4></div></div>
+          <p>Met de kabelbaan terug omhoog naar de auto bij de Citadel.</p>
+          <div class="pills"><span class="pill">Kabelbaan ∞</span></div>
         </div></div>
 
         <div class="tevent meuse"><div class="dot"></div><div class="tcard">
-          <div class="hd"><div class="ico">{{ico_key}}</div><div><div class="when">16:30</div><h4>Check-in bij Les pieds dans l'eau</h4></div></div>
+          <div class="hd"><div class="ico">{{ico_key}}</div><div><div class="when">±16:15</div><h4>Check-in bij Les pieds dans l'eau</h4></div></div>
           <p><b>Onze accommodatie</b> aan de boorden van de Maas. Koffers naar binnen, terras op en het eerste biertje van het verblijf openen.</p>
           <div class="pills"><span class="pill gold">🏠 De accommodatie</span><span class="pill">Lustin · Bordure de Meuse</span></div>
         </div></div>
@@ -605,18 +618,17 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
         </div></div>
 
         <div class="tevent meuse"><div class="dot"></div><div class="tcard">
-          <div class="hd"><div class="ico">{{ico_kayak}}</div><div><div class="when">10:30 / 11:00</div><h4>Kayakken op de Maas 🛶</h4></div></div>
-          <p>Vertrek vanuit <b>Yvoir Nautic</b>: 2× 1-persoons kano + 1× 2-persoons kayak. Onderweg lunchen we in een <b>leuk restaurantje langs de Maas</b> — plek nog uit te zoeken. Dé hoofdact van zaterdag.</p>
-          <div class="pills"><span class="pill">2× kano</span><span class="pill">1× kayak</span><span class="pill gold">🍽️ Lunchstop t.b.d.</span><a class="link" href="https://www.yvoirnautic.be/fr/" target="_blank" rel="noopener">🌐 Yvoir Nautic</a></div>
+          <div class="hd"><div class="ico">{{ico_kayak}}</div><div><div class="when">11:00 – 14:30</div><h4>Kayakken op de Maas 🛶</h4></div></div>
+          <p>Vertrek vanuit <b>Yvoir Nautic</b>: 2× een 2-persoons kano/kayak. Onderweg lunchen we in een <b>leuk restaurantje langs de Maas</b> — plek nog uit te zoeken. Dé hoofdact van zaterdag.</p>
+          <div class="pills"><span class="pill">2× 2-persoons</span><span class="pill gold">🍽️ Lunchstop t.b.d.</span><a class="link" href="https://www.yvoirnautic.be/fr/" target="_blank" rel="noopener">🌐 Yvoir Nautic</a></div>
         </div></div>
 
         <div class="tevent"><div class="dot"></div><div class="tcard">
-          <div class="hd"><div class="ico">{{ico_beer}}</div><div><div class="when">Einde middag</div><h4>Keuzestress: 3 opties</h4></div></div>
-          <p>Eén beslissing te nemen voor de late namiddag. Tik je favoriet aan:</p>
+          <div class="hd"><div class="ico">{{ico_beer}}</div><div><div class="when">Einde middag</div><h4>Keuze: 2 opties</h4></div></div>
+          <p>Maison Leffe deden we al op vrijdag, dus blijven er twee over. Tik je favoriet aan:</p>
           <div class="opts" id="satOpts">
             <div class="opt" data-opt="1"><div class="on">🧀 Optie 1</div><div class="od"><b>Maredsous</b> 16:00–17:30 — rondleiding microbrouwerij &amp; kaasmuseum van de Abdij.</div><div class="vote">Tik om te kiezen</div></div>
-            <div class="opt" data-opt="2"><div class="on">🍺 Optie 2</div><div class="od"><b>Maison Leffe</b>, Dinant 15:00–16:00 — €15 p.p., interactieve rondleiding, proeverij + cadeautje (max 1 uur).</div><div class="vote">Tik om te kiezen</div></div>
-            <div class="opt" data-opt="3"><div class="on">🏡 Optie 3</div><div class="od">Gewoon lekkere <b>speciaalbiertjes</b> bij de accommodatie, rond 16:00.</div><div class="vote">Tik om te kiezen</div></div>
+            <div class="opt" data-opt="3"><div class="on">🏡 Optie 2</div><div class="od">Gewoon lekkere <b>speciaalbiertjes</b> bij de accommodatie, rond 16:00.</div><div class="vote">Tik om te kiezen</div></div>
           </div>
         </div></div>
 
@@ -640,20 +652,28 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
       <div class="tline">
 
         <div class="tevent"><div class="dot"></div><div class="tcard">
-          <div class="hd"><div class="ico">{{ico_bread}}</div><div><div class="when">Ochtend</div><h4>Licht ontbijt — broodjes &amp; co</h4></div></div>
-          <p>Rustig opstarten met broodjes en koffie voordat we de boel inpakken.</p>
-          <div class="pills"><span class="pill">Easy does it</span></div>
+          <div class="hd"><div class="ico">{{ico_bread}}</div><div><div class="when">Ochtend</div><h4>Uitgebreid ontbijt</h4></div></div>
+          <p>Op tijd én uitgebreid ontbijten, zodat we een goede bodem hebben voor de terugreis.</p>
+          <div class="pills"><span class="pill gold">Goede bodem</span></div>
         </div></div>
 
         <div class="tevent"><div class="dot"></div><div class="tcard">
-          <div class="hd"><div class="ico">{{ico_key}}</div><div><div class="when">10:30</div><h4>Check-out accommodatie</h4></div></div>
-          <p>Spullen inladen in de Tesla en richting huis — met één strategische tussenstop.</p>
+          <div class="hd"><div class="ico">{{ico_key}}</div><div><div class="when">10:15</div><h4>Uiterlijk wegrijden</h4></div></div>
+          <p>Check-out en inladen: liefst <b>kwart over tien</b> weg — anders redden we het niet op tijd.</p>
+          <div class="pills"><span class="pill red">Op tijd weg!</span></div>
         </div></div>
 
         <div class="tevent"><div class="dot"></div><div class="tcard">
-          <div class="hd"><div class="ico">{{ico_fork}}</div><div><div class="when">12:30 – 13:00</div><h4>Lunch @ Brasserie de Berk</h4></div></div>
-          <p>Afsluitende lunch in Bergen op Zoom om het weekend waardig uit te luiden.</p>
-          <div class="pills"><span class="pill gold">Bergen op Zoom</span><span class="pill">Laatste ronde</span></div>
+          <div class="hd"><div class="ico">{{ico_padel}}</div><div><div class="when">12:30 – 13:30</div><h4>Padel @ De Padellers</h4></div></div>
+          <p>Padellen bij <b>De Padellers</b> (bij de Karmel) in Bergen op Zoom.</p>
+          <div class="note">🎾 Koen heeft in principe 4 rackets + ballen bij zich.</div>
+          <div class="pills"><span class="pill">Bergen op Zoom</span></div>
+        </div></div>
+
+        <div class="tevent"><div class="dot"></div><div class="tcard">
+          <div class="hd"><div class="ico">{{ico_fork}}</div><div><div class="when">14:00</div><h4>Broodjeslunch bij Koen</h4></div></div>
+          <p>Afsluiten met broodjes bij Koen thuis — verzorgd door Irene. 🙌</p>
+          <div class="pills"><span class="pill gold">Bij Koen thuis</span><span class="pill">Laatste ronde</span></div>
         </div></div>
 
       </div>
@@ -772,10 +792,10 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
           <li><span class="box">✓</span><span class="lab"><b>Koen</b> — boodschappen, bier/drank + <b>groenten</b> voor de BBQ</span></li>
           <li><span class="box">✓</span><span class="lab"><b>Vlees</b> voor de BBQ: ter plaatse halen bij de <b>lokale slager</b> (za)</span></li>
           <li><span class="box">✓</span><span class="lab"><b>Koen</b> regelt de BBQ-<b>kolen</b> 🔥</span></li>
-          <li><span class="box">✓</span><span class="lab"><b>Keuze maken</b> voor zaterdagmiddag (Maredsous / Leffe / terras)</span></li>
-          <li><span class="box">✓</span><span class="lab"><b>Maredsous</b> of <b>Maison Leffe</b> evt. nog reserveren</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Keuze maken</b> voor zaterdagmiddag (Maredsous / terras)</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Maison Leffe</b>-tour (vr) + evt. <b>Maredsous</b> (za) reserveren</span></li>
           <li><span class="box">✓</span><span class="lab"><b>Kano's / kayak</b> reserveren via Yvoir Nautic (online boeken, anders mailen)</span></li>
-          <li><span class="box">✓</span><span class="lab">Padelbaan <b>Smash350</b> reserveren (vr 12:30)</span></li>
+          <li><span class="box">✓</span><span class="lab">Padelbaan reserveren bij <b>De Padellers</b> (zo 12:30)</span></li>
           <li><span class="box">✓</span><span class="lab"><b>Vincent</b> laat zijn Frans los bij de pizzeria</span></li>
         </ul>
       </div>
@@ -786,7 +806,7 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
           <div class="contact"><span class="e">🛶</span><div class="ct"><b>Yvoir Nautic</b><span>Kano's/kayak — online reserveren · anders info@yvoirnautic.be</span></div><a href="https://www.yvoirnautic.be/" target="_blank" rel="noopener">Reserveren →</a></div>
           <div class="contact"><span class="e">🍕</span><div class="ct"><b>Pizzeria Venezia</b><span>Afhalen vlakbij — Vincent belt</span></div><a href="https://maps.app.goo.gl/hnUTXSGwChTUGS1q9" target="_blank" rel="noopener">Route →</a></div>
           <div class="contact"><span class="e">🥩</span><div class="ct"><b>Lokale slager</b><span>Vlees voor de BBQ</span></div><a href="https://maps.app.goo.gl/yq2eL6gxedN3Mndi9" target="_blank" rel="noopener">Route →</a></div>
-          <div class="contact"><span class="e">🎾</span><div class="ct"><b>Smash350 Padel</b><span>Rue Saint-Jacques 350, Dinant</span></div><a href="https://smash350.be/" target="_blank" rel="noopener">Site →</a></div>
+          <div class="contact"><span class="e">🎾</span><div class="ct"><b>De Padellers</b><span>Bij de Karmel · Bergen op Zoom (zo 12:30)</span></div><a href="https://www.google.com/maps/search/De+Padellers+Karmel+Bergen+op+Zoom" target="_blank" rel="noopener">Maps →</a></div>
         </div>
       </div>
 
@@ -874,7 +894,7 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
     <div class="jimmy-txt">
       <b>Yeah mon! 🇯🇲</b>
       Whoop whoop — that's the sound of the police!
-      <span>— Jamaica Jimmy, speciaal voor Anton 🌴 (klik om te sluiten)</span>
+      <span>— Jimmy Sworo, speciaal voor Anton 🌴 (klik om te sluiten)</span>
     </div>
   </div>
 </div>
@@ -1042,9 +1062,9 @@ function init(){
   const G=[
     {ico:'ico_citadel',ph:'photos/citadel.jpg',c1:'#5b6685',c2:'#2b3354',t:'Citadel van Dinant',d:'Hoog boven de stad, bereikbaar via 408 treden óf — verstandiger — de kabelbaan. Spectaculair uitzicht over de Maas en de beroemde Collégiale.',f:'Adolphe Sax, uitvinder van de saxofoon, is geboren in Dinant.'},
     {ico:'ico_beer',ph:'photos/leffe.jpg',c1:'#caa24a',c2:'#6e5316',t:'Speciaalbier & Leffe',d:'De abdij van Leffe ligt pal in Dinant. In Maison Leffe proef je de geschiedenis met rondleiding, proeverij én een cadeautje.',f:'Tip: combineer met een lokale "Couque de Dinant" — keihard maar legendarisch.'},
-    {ico:'ico_kayak',ph:'photos/kayak.jpg',c1:'#2bc6b5',c2:'#0a5c54',t:'Kayakken op de Maas',d:'Het kalme water tussen Yvoir en Dinant is perfect voor een ontspannen tocht. 2 kano\'s + 1 kayak vanuit Yvoir Nautic.',f:'Lunch onderweg op een zandbankje = peak weekendje weg.'},
+    {ico:'ico_kayak',ph:'photos/kayak.jpg',c1:'#2bc6b5',c2:'#0a5c54',t:'Kayakken op de Maas',d:'Het kalme water tussen Yvoir en Dinant is perfect voor een ontspannen tocht. 2× een 2-persoons kano/kayak vanuit Yvoir Nautic.',f:'Lunch onderweg in een leuk restaurantje = peak weekendje weg.'},
     {ico:'ico_meat',ph:'photos/maredsous.jpg',c1:'#3aa655',c2:'#155c2c',t:'Abdij van Maredsous',d:'Microbrouwerij, kaasmuseum en die heerlijke abdijbieren. Een rustige groene plek midden in de Ardennen.',f:'Maredsous-kaas + tripel = wetenschappelijk bewezen all combo.'},
-    {ico:'ico_padel',ph:'photos/padel.jpg',c1:'#e08a1e',c2:'#8a4d0c',t:'Padel @ Smash350',d:'Even knallen op de baan voor de eerste adrenaline van het weekend. Winnaars trakteren, verliezers ook.',f:'Het adres? Rue Saint-Jacques 350 — daar komt de naam vandaan.'},
+    {ico:'ico_padel',ph:'photos/padel.jpg',c1:'#e08a1e',c2:'#8a4d0c',t:'Padel @ De Padellers',d:'De afsluiter op zondag: padellen bij De Padellers (bij de Karmel) in Bergen op Zoom, op de terugweg naar huis.',f:'Laatste kans op een overwinning voordat het weekend erop zit.'},
     {ico:'ico_bbq',ph:'photos/bbq.jpg',c1:'#e23b3b',c2:'#7a1717',t:'BBQ aan het water',d:'Vlees van de lokale slager, biertje van Koen, zon onder over de Maas. De avond waar het hele weekend naartoe werkt.',f:'Maximum fiber distance bereikt zijn piek rond de derde worst.'},
   ];
   const gal=document.getElementById('gallery');
@@ -1267,7 +1287,6 @@ function initMaps(){
       {ll:[50.2592,4.9145],n:'🏰 Citadel Dinant',t:'🏰 Citadel van Dinant',d:'Entree €15 · kabelbaan ∞',c:gold,dir:'left'},
       {ll:[50.2604,4.9123],n:'🍺 Maison Leffe',t:'🍺 Dinant centrum / Maison Leffe',d:'Speciaalbier & saxofoon',c:gold,dir:'right'},
       {ll:[50.3289,4.7672],n:'🧀 Maredsous',t:'🧀 Abdij van Maredsous',d:'Brouwerij & kaasmuseum',c:meuse,dir:'top'},
-      {ll:[50.2674,4.9376],n:'🎾 Smash350',t:'🎾 Smash350 Padel',d:'Rue Saint-Jacques 350, Dinant',c:gold,dir:'right'},
     ];
     poi.forEach(p=>L.marker(p.ll,{icon:bigDot(p.c)}).addTo(map)
       .bindTooltip(p.n,{permanent:true,direction:p.dir,className:'maplabel',offset:p.dir==='top'?[0,-12]:(p.dir==='left'?[-12,0]:[12,0])})
