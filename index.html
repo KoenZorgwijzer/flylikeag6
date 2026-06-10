@@ -203,7 +203,7 @@ nav .inner{display:flex;align-items:center;gap:18px;justify-content:space-betwee
 .tline{position:relative;max-width:860px;margin:0 auto;padding-left:8px}
 .tline::before{content:"";position:absolute;left:30px;top:6px;bottom:6px;width:3px;background:linear-gradient(var(--gold),var(--meuse));border-radius:3px}
 .tevent{position:relative;padding:0 0 24px 70px}
-.tevent .dot{position:absolute;left:21px;top:2px;width:21px;height:21px;border-radius:50%;background:var(--bg);border:4px solid var(--gold);box-shadow:0 0 0 4px rgba(245,185,66,.14)}
+.tevent .dot{position:absolute;left:13px;top:2px;width:21px;height:21px;border-radius:50%;background:var(--bg);border:4px solid var(--gold);box-shadow:0 0 0 4px rgba(245,185,66,.14)}
 .tevent.meuse .dot{border-color:var(--meuse)}
 .tcard{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow);transition:.25s}
 .tcard:hover{transform:translateY(-3px);border-color:rgba(245,185,66,.4)}
@@ -790,9 +790,9 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
           <li><span class="box">✓</span><span class="lab"><b>Koen</b> — boodschappen, bier/drank + <b>groenten</b> voor de BBQ</span></li>
           <li><span class="box">✓</span><span class="lab"><b>Vlees</b> voor de BBQ: ter plaatse halen bij de <b>lokale slager</b> (za)</span></li>
           <li><span class="box">✓</span><span class="lab"><b>Koen</b> regelt de BBQ-<b>kolen</b> 🔥</span></li>
-          <li><span class="box">✓</span><span class="lab"><b>Maison Leffe</b>-tour reserveren (za, na de kayak)</span></li>
-          <li><span class="box">✓</span><span class="lab"><b>Lesse-afvaart</b> reserveren bij <b>Dinant Evasion</b> (shuttle Dinant → Gendron)</span></li>
-          <li><span class="box">✓</span><span class="lab">Padelbaan reserveren bij <b>De Padellers</b> (zo 12:30)</span></li>
+          <li class="done"><span class="box">✓</span><span class="lab"><b>Maison Leffe</b>-tour reserveren (za, na de kayak)</span></li>
+          <li class="done"><span class="box">✓</span><span class="lab"><b>Lesse-afvaart</b> reserveren bij <b>Dinant Evasion</b> (shuttle Dinant → Gendron)</span></li>
+          <li class="done"><span class="box">✓</span><span class="lab">Padelbaan reserveren bij <b>De Padellers</b> (zo 12:30)</span></li>
           <li><span class="box">✓</span><span class="lab"><b>Vincent</b> laat zijn Frans los bij de pizzeria</span></li>
         </ul>
       </div>
@@ -1281,7 +1281,7 @@ function initMaps(){
     tiles().addTo(map);
     const poi=[
       {ll:[50.3790,4.8750],n:'🏡 Accommodatie',t:'🏡 Les pieds dans l\'eau',d:'Rue Rochers de Frène 2, Lustin',c:red,dir:'top'},
-      {ll:[50.2236,4.9089],n:'🛶 Gendron — start Lesse',t:'🛶 Start afvaart Lesse (Gendron)',d:'Shuttle vanuit Dinant · ±12 km terug peddelen',c:meuse,dir:'left'},
+      {ll:[50.210547,4.963764],n:'🛶 Gendron — start Lesse',t:'🛶 Start afvaart Lesse (Gendron)',d:'Shuttle vanuit Dinant · ±12 km terug peddelen',c:meuse,dir:'left'},
       {ll:[50.2592,4.9145],n:'🏰 Citadel Dinant',t:'🏰 Citadel van Dinant',d:'Entree €15 · kabelbaan ∞',c:gold,dir:'left'},
       {ll:[50.2604,4.9123],n:'🍺 Maison Leffe',t:'🍺 Maison Leffe (Dinant)',d:'Zaterdag na de kayak · proeverij & cadeautje',c:gold,dir:'right'},
     ];
