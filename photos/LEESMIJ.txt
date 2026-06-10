@@ -1,0 +1,17 @@
+FOTO'S VOOR DE WEBSITE
+======================
+
+Zet hier de foto's met EXACT deze bestandsnamen (kleine letters, .jpg):
+
+  citadel.jpg      -> kaart "Citadel van Dinant"
+  leffe.jpg        -> kaart "Speciaalbier & Leffe"
+  kayak.jpg        -> kaart "Kayakken op de Maas"
+  maredsous.jpg    -> kaart "Abdij van Maredsous"
+  padel.jpg        -> kaart "Padel @ Smash 350"
+  bbq.jpg          -> kaart "BBQ aan het water"
+
+Aanbevolen formaat: liggend (landscape), ~1200 x 800 px (3:2), JPG.
+De foto's worden automatisch bijgesneden om de kaart te vullen.
+
+Geen foto geplaatst? Dan toont de site gewoon de getekende illustratie.
+Je hoeft verder niks aan te passen — bestand erin zetten = klaar.
