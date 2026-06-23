@@ -334,6 +334,17 @@ nav .inner{display:flex;align-items:center;gap:18px;justify-content:space-betwee
 .qa .q{min-height:1.5em;font-family:'Anton';font-size:var(--fs-title);color:#fff;margin-top:12px}
 .qa .who{color:var(--muted);font-size:var(--fs-small);margin-top:6px}
 
+/* ---------- BOODSCHAPPEN ---------- */
+.shop-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;align-items:start}
+.shopcard{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:var(--shadow)}
+.shopcard h3{font-family:'Archivo';font-weight:900;color:#fff;font-size:var(--fs-title);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.shopcard .tag{font-size:var(--fs-small);font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(43,198,181,.16);color:#8defdf;border:1px solid rgba(43,198,181,.35)}
+.shopcard .tag.gold{background:rgba(245,185,66,.16);color:var(--gold-soft);border-color:rgba(245,185,66,.35)}
+.shopcard .tag.red{background:rgba(236,84,84,.16);color:#ffb0b0;border-color:rgba(236,84,84,.35)}
+.shop-note{margin-top:24px;display:flex;gap:12px;align-items:flex-start;font-size:var(--fs-body);color:var(--gold-soft);background:rgba(245,185,66,.1);border:1px solid rgba(245,185,66,.25);padding:16px 18px;border-radius:14px;max-width:760px;margin-left:auto;margin-right:auto}
+.shop-note b{color:#fff}
+@media(max-width:900px){.shop-grid{grid-template-columns:1fr}}
+
 /* ---------- THANKS / MR V ---------- */
 .thanks{background:
    radial-gradient(700px 400px at 50% 0%, rgba(245,185,66,.18), transparent 60%),
@@ -400,6 +411,7 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
       <a href="#bier">Bier</a>
       <a href="#quiz">Quiz</a>
       <a href="#info">Info</a>
+      <a href="#boodschappen">Boodschappen</a>
       <a href="#thanks">Mr. V</a>
     </div>
   </div>
@@ -833,6 +845,107 @@ footer .temp{margin-top:12px;display:inline-flex;align-items:center;gap:8px;colo
   </div>
 </section>
 
+<!-- ===== BOODSCHAPPEN ===== -->
+<section class="pad" id="boodschappen" style="background:var(--bg-alt)">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kicker">Inkooplijst</div>
+      <h2>Boodschappen &amp; meenemen</h2>
+      <p>Alles wat we inkopen en van huis meenemen, netjes per moment geordend. Tik een item aan om het af te vinken. 🛒</p>
+    </div>
+
+    <div class="shop-grid">
+
+      <div class="shopcard">
+        <h3>🍳 Ontbijt <span class="tag gold">Za &amp; Zo</span></h3>
+        <ul class="check shop-list">
+          <li><span class="box">✓</span><span class="lab"><b>Eieren</b> — 20 stuks</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Ontbijtspek</b> — 200 g</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Tomaten</b> — 3-4 stuks</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Afbakbrood</b> — 2 wit / 2 bruin <i>(groot?)</i></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Lupak boter</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Jus</b> — 2× 1L</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Nespresso cups</b> — 16×</span></li>
+        </ul>
+      </div>
+
+      <div class="shopcard">
+        <h3>🥪 Lunch <span class="tag">Zaterdag</span></h3>
+        <ul class="check shop-list">
+          <li><span class="box">✓</span><span class="lab"><b>Bananen</b> — 6×</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Witte &amp; bruine bollen</b> — 12×</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Kaas</b> — 2 pakken</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Tonijnsalade</b> — 1×</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Cervelaat</b> — 2×</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Hummus</b> — 1×</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Komkommer</b> — 1 stuk</span></li>
+        </ul>
+      </div>
+
+      <div class="shopcard">
+        <h3>🍺 Borrel &amp; drank <span class="tag gold">Vr &amp; Za</span></h3>
+        <ul class="check shop-list">
+          <li><span class="box">✓</span><span class="lab"><b>Water</b> — 6 flessen 1,5L</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Water</b> — 12 flesjes 0,5L <i>(handig voor onderweg kayakken)</i></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Ice tea green</b> — 1 fles</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Cola Zero</b> — blikjes <i>(handig voor onderweg)</i></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Corona</b> — 12×</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Hoegaarden Wit</b> — 12×</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Leffe Blond</b> — 12× <i>of iets anders?</i></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Cornet Blond Oaked</b> — 12×</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Tripel Karmeliet</b> — 12×</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Limoentjes</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Tonic</b> — 3× 1L</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Gin</b> <i>(neemt Koen mee vanuit huis)</i></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Chips</b> — 4 zakken (divers)</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Olijven</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Kaasje</b></span></li>
+        </ul>
+      </div>
+
+      <div class="shopcard">
+        <h3>🔥 BBQ <span class="tag red">Zaterdag</span></h3>
+        <ul class="check shop-list">
+          <li><span class="box">✓</span><span class="lab"><b>Vlees</b> voor dag 2 (avond) — <i>ter plaatse in Lustin regelen</i></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Brood</b> bij de bakker — <i>ter plaatse in Lustin regelen</i></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Grillgroenten</b> — paprika, courgette, ui</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Zonnebloemolie</b>?</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Houtskool</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Aanmaakblokjes</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Aluminiumfolie</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Keukenpapier</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Chilisaus</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Knoflooksaus</b></span></li>
+        </ul>
+      </div>
+
+      <div class="shopcard">
+        <h3>🧺 Algemeen</h3>
+        <ul class="check shop-list">
+          <li><span class="box">✓</span><span class="lab"><b>Vuilniszakken</b></span></li>
+        </ul>
+      </div>
+
+      <div class="shopcard">
+        <h3>🎒 Van huis meenemen <span class="tag">Buiten boodschappen</span></h3>
+        <ul class="check shop-list">
+          <li><span class="box">✓</span><span class="lab"><b>Kaarten</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Perudo</b> (spelletje)</span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Wasmiddel</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Theedoek</b></span></li>
+          <li><span class="box">✓</span><span class="lab"><b>Vaatdoeken</b></span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="shop-note">
+      <span style="font-size:1.4rem;line-height:1">💶</span>
+      <span>Alles wat overblijft kan <b>Koen</b> achteraf overnemen en in mindering brengen op de kosten.</span>
+    </div>
+  </div>
+</section>
+
 <!-- ===== THANKS / MR V ===== -->
 <section class="thanks" id="thanks">
   <div class="wrap">
@@ -1054,7 +1167,7 @@ function init(){
   });
 
   /* checklists */
-  document.querySelectorAll('#checklist li, #paklijst li').forEach(li=>li.addEventListener('click',()=>li.classList.toggle('done')));
+  document.querySelectorAll('#checklist li, #paklijst li, .shop-list li').forEach(li=>li.addEventListener('click',()=>li.classList.toggle('done')));
 
   /* gallery */
   const G=[
